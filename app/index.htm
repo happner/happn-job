@@ -1,0 +1,81 @@
+<html style="margin:5px">
+  <head>
+  	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  	<link rel="stylesheet" href="css/bootstrap.css">
+  	<link rel="stylesheet" href="css/bootstrap-theme.css">
+ 	<link rel="stylesheet" href="css/fire-grate.css">
+ 	<link rel="stylesheet" href="css/treeview.css">
+ 	<link rel="stylesheet" href="css/abn_tree.css">
+ 	<link rel="stylesheet" href="css/jsplumb.css">
+
+
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
+    <script src="lib/angular/angular-animate.js"></script>
+    <script src='https://cdn.firebase.com/v0/firebase.js'></script>
+	<script src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
+	<script src="lib/jquery-1.9.1.js"></script>
+	<script type='text/javascript' src='lib/jquery-ui.js'></script>
+	<script type='text/javascript' src='lib/jquery.ui.touch-punch.min.js'></script>
+	<script type='text/javascript' src='lib/jsplumb.js'></script>
+	<script src="lib/bootstrap.min.js"></script>
+	<script src="lib/ace/ace.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/system-controllers.js"></script>
+	<script src="js/controllers/project-controllers.js"></script>
+	<script src="js/controllers/operation-controllers.js"></script>
+	<script src="js/controllers/control-controllers.js"></script>
+	<script src="js/controllers/shape-controllers.js"></script>
+	<script src="js/controllers/flow-controllers.js"></script>
+    <script src="js/filters/system-filters.js"></script>
+    <script src="js/services/system-services.js"></script>
+    <script src="js/directives/draganddrop.js"></script>
+    <script src="js/directives/treeview.js"></script>
+    <script src="js/directives/ui-ace.js"></script>
+    <script src="js/directives/ui-jsplumb.js"></script>
+    <script src="lib/base64.js"></script>
+  </head>
+  <body style="margin:5px" ng-app="ideApp">
+	<div ng-controller="BaseController" class="row">
+	  <div class="col-md-3 sidebar" ng-controller="TreeController" style="padding-right:0px">
+	   <div class="header-div"><span class="header">happn job</span>
+		   <span class="dropdown actions-span">
+			  <i href="#" class="dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown"></i>
+				 <ul class="dropdown-menu" >
+		          <li><a style="cursor:pointer" ng-click="openNewModal('Project', 'project_new')">Project</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('Operation', 'operation_new')">Operation</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('Control', 'control_new')">Control</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('Shape', 'shape_new')">Shape</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('Feed', 'feed_new')">Feed</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('Flow', 'flow_new')">Flow</a></li>
+		        </ul>
+			</span>
+		</div>
+	  <br>
+   	  <abn-tree tree-data="ux_treedata" meta-data="meta" icon-expand="fa fa-plus-square" icon-collapse="fa fa-minus-square" icon-leaf="" on-select="my_tree_handler(branch)" on-expand-or-contract="on_expand_or_contract(branch)" expand-level="3"></abn-tree>
+	  </div>
+	  <div class="col-md-9 content" ng-controller="ContentController">
+	 	<span class="content-actions" style="display:{{actions_display}};position:absolute;z-index:9999999999;top:0px;right:0px" id="span_content_actions">
+	 		<i ng-repeat="action in actions" ng-click="action_selected(action)" class="content-action {{action.cssClass}}"></i>
+	 	</span>
+	 	<div ng-include src="templatePath"></div>
+	  </div>
+	</div>
+
+	<div id="modalContent" class="modal fade">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header" style="height:60px">
+	        <span class="modal-title label-dark" id="modalContentHeader" style="font-size:16px"></span>
+	        <button type="button" class="btn btn-default" onclick='cancelModalContent()' style="float:right;margin-left:5px;">Cancel</button>
+	        <button id="btnSave" type="button" class="btn btn-success" onclick='saveModalContent()' style="float:right;">Save</button>
+	        <br>
+	      </div>
+	      <div class="modal-body">
+
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+  </body>
+</html>

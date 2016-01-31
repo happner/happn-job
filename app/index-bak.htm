@@ -1,0 +1,92 @@
+<html style="margin:5px">
+  <head>
+  	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+  	<link rel="stylesheet" href="css/bootstrap.css">
+  	<link rel="stylesheet" href="css/bootstrap-theme.css">
+ 	<link rel="stylesheet" href="css/fire-grate.css">
+ 	<link rel="stylesheet" href="css/treeview.css">
+ 	<link rel="stylesheet" href="css/abn_tree.css">
+ 	
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/ui-bootstrap-tpls-0.9.0.js"></script>
+    <script src="lib/angular/angular-animate.js"></script>
+    <script src='https://cdn.firebase.com/v0/firebase.js'></script>
+	<script src='https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js'></script>
+	<script src="lib/jquery-1.9.1.js"></script>
+	<script src="lib/bootstrap.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers/project-controllers.js"></script>
+	<script src="js/controllers/processor-controllers.js"></script>
+    <script src="js/controllers/system-controllers.js"></script>
+    <script src="js/filters/system-filters.js"></script>
+    <script src="js/services/system-services.js"></script>
+    <script src="js/directives/system-treeview.js"></script>
+  </head>
+  <script>
+  //http://jsfiddle.net/jhfrench/GpdgF/
+  //http://jhfrench.github.io/bootstrap-tree/docs/example.html
+  $( document ).ready(function() {
+	  console.log('ran the tree update');
+  });
+  
+  </script>
+  <body style="margin:5px" ng-app="firegrateApp">
+  <div class="bs-example bs-navbar-top-example">
+	  <nav id="topNavbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <span id='headerSpan' class="navbar-brand">Fire-grate 0.1</span>
+	    </div>
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse navbar-ex5-collapse">
+	      <ul class="nav navbar-nav">
+	       <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add new<b class="caret"></b></a>
+	        <ul class="dropdown-menu" ng-controller="ModalContentController">
+	          <li><a style="cursor:pointer" ng-click="open('Project', 'project_new')">Project</a></li>
+	          <li><a style="cursor:pointer" href="#">Helper</a></li>
+	          <li><a style="cursor:pointer" href="#">Control</a></li>
+	          <li><a style="cursor:pointer" ng-click="open('Processor', 'processor_new')" href="#">Processor</a></li>
+	          <li><a style="cursor:pointer" href="#">Bot</a></li>
+	          <li class="divider"></li>
+	          <li><a style="cursor:pointer" href="#">Integration</a></li>
+	          <li><a style="cursor:pointer" href="#">Message Schema</a></li>
+	        </ul>
+	      </li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+		      
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </nav>
+	</div>
+	<div class="row">
+	  <div class="header"><h3>Fire-grate 0.1</h3></div>
+	  <div class="col-md-3 sidebar" ng-controller="TreeController" style="padding-right:0px">
+	   		<abn-tree tree-data-bak="example_treedata" tree-data="ux_treedata" meta-data="meta" icon-expand="fa fa-plus-square" icon-collapse="fa fa-minus-square" icon-leaf="" on-select="my_tree_handler(branch)" on-expand-or-contract="on_expand_or_contract(branch)" expand-level="3"></abn-tree>
+	  </div>
+	  <div class="col-md-9 content" ng-controller="ContentController">
+	 	<span class="content-actions" style="display:{{actions_display}}" id="span_content_actions">
+	 		<i ng-repeat="action in actions" ng-click="action_selected(action)" class="content-action {{action.cssClass}}"></i>
+	 	</span>
+	 	<div ng-include src="templatePath"></div>
+	  </div>
+	</div>
+	
+	<div id="modalContent" class="modal fade">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header" style="height:60px">
+	        <span class="modal-title label-dark" id="modalContentHeader" style="font-size:16px"></span>
+	        <button type="button" class="btn btn-default" onclick='cancelModalContent()' style="float:right;margin-left:5px;">Cancel</button>
+	        <button id="btnSave" type="button" class="btn btn-success" onclick='saveModalContent()' style="float:right;">Save</button>
+	        <br>
+	      </div>
+	      <div class="modal-body">
+	     
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+  </body>
+</html>
