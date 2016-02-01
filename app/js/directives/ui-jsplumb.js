@@ -17,9 +17,12 @@ angular.module('ui.jsPlumb', [])
     	  drawingEvent: '=',
     	  drawingMethod:'='
       },
-     // template: $templateCache.get('../templates/js-plumb.html'),
+      /*
       template: '<div class="demo flowchart-demo" id="{{drawingData.id}}">' +
     	     		'<div ng-repeat="shape in drawingData.shapes" class="{{drawingData.shapeClass + shape.cssClass}}" style="{{shape.style + shape.position}}" id="{{\'flowchart\' + shape.id}}"><br/><strong>{{shape.label}}</strong><span class="action-container"><i class="action glyphicon glyphicon-remove"></i><i onclick="alert(\'edit clicked\')" class="action glyphicon glyphicon-pencil"></i></span></div>' +
+    	     	'</div> ',*/
+   	  template: '<div class="demo flowchart-demo" id="{{drawingData.id}}">' +
+    	     		'<div ng-repeat="shape in drawingData.shapes" class="{{drawingData.shapeClass + shape.cssClass}}" style="{{shape.style + shape.position}}" id="{{\'flowchart\' + shape.id}}"><br/><strong>{{shape.label}}</strong><span class="action-container"><i class="action glyphicon glyphicon-remove"></i><i ng-click="drawingEvent(\'shape-clicked\', shape)" class="action glyphicon glyphicon-pencil"></i></span></div>' +
     	     	'</div> ',
       link: function (scope, elm, attrs) {
         var options, opts, instance;
