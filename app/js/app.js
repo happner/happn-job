@@ -16,6 +16,19 @@ var ideApp = angular.module('ideApp', [
   'ngDragDrop'
 ]);
 
+ideApp.directive('dynamic', function ($compile) {
+  return {
+    restrict: 'A',
+    replace: true,
+    link: function (scope, ele, attrs) {
+      scope.$watch(attrs.dynamic, function(html) {
+        ele.html(html);
+        $compile(ele.contents())(scope);
+      });
+    }
+  };
+});
+
 ideApp.directive ('compileHtml', function($compile) {
 	return  {
 	  restrict: 'A',

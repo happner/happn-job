@@ -1,4 +1,4 @@
-fire-grate
+happn-job
 ==========
 
-Asynchronous javascript integration platform 
+Asynchronous javascript job and integration platform

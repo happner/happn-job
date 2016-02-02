@@ -126,6 +126,11 @@ ideControllers.controller('flow_edit', ['$scope',
 					$scope.flow.drawing.connections.push(connection);
             	}
 			}
+
+            if (event == "shape-clicked"){
+                console.log(params);
+                $scope.openNewModal('Edit step', 'step_edit');
+            }
         }
 
         $scope.shapeEdit = function(shape) {
