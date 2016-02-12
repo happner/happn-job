@@ -33,8 +33,8 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'angularFi
 	$scope.meta = {expanded:{}, selected:null};
 	$scope.ux_treedata = null;
 
-	dataService.init(AppSession.firebaseURL);
-	dataService.setToScope($scope, 'ux_treedata');
+	// dataService.init(AppSession.firebaseURL);
+	// dataService.setToScope($scope, 'ux_treedata');
 
 	/*
 	var ref = new Firebase('https://southbite.firebaseio.com/Fire-grate');
@@ -42,19 +42,9 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'angularFi
 	*/
 }]);
 
-ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce', 'dataService', 'AppSession', 'happnService', function($scope, $modal, $log, $sce, dataService, AppSession, happnService) {
+ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce', 'dataService', 'AppSession', function($scope, $modal, $log, $sce, dataService, AppSession) {
 
-	happnService.init('127.0.0.1', 3000, '_ADMIN', 'happn', function(e){
-
-
-
-	});
-
-	//mmm..http://stackoverflow.com/questions/17386820/how-do-i-dynamically-load-multiple-templates-using-angularjs
-	  dataService.init(AppSession.firebaseURL);
-	  dataService.setToScope($scope, 'data');
-
-	  $scope.openModal = function (templatePath, controller, handler, args) {
+	$scope.openModal = function (templatePath, controller, handler, args) {
 		    var modalInstance = $modal.open({
 		      templateUrl: templatePath,
 		      controller: controller,
@@ -70,9 +60,9 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
       if (handler)
     	  modalInstance.result.then(handler.saved, handler.dismissed);
-	 };
+	};
 
-	 $scope.openNewModal = function (type, action) {
+	$scope.openNewModal = function (type, action) {
 
 		 var handler = {
 				 saved:function(result){
@@ -84,18 +74,36 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 		 };
 
 		 return $scope.openModal('../templates/' + action + '.html', action.toString(), handler);
-	 };
+	};
 
-	 $scope.to_trusted = function(html_code) {
+	$scope.to_trusted = function(html_code) {
 		  return $sce.trustAsHtml(html_code);
-	 };
+	};
 
-	 $scope.toArray = function(items){
+	$scope.toArray = function(items){
 		  var returnArray = [];
 		  for (var item in items)
 			  returnArray.push(item);
 		  return returnArray;
-	  };
+	};
+
+	dataService.init('127.0.0.1', 3000, '_ADMIN', 'happn', function(e){
+
+		if (e) throw e;
+
+		dataService.instance.client.get('/Project/*', function(e, projects){
+
+			console.log('got projects:::', projects);
+
+		});
+
+	});
+
+	//mmm..http://stackoverflow.com/questions/17386820/how-do-i-dynamically-load-multiple-templates-using-angularjs
+	//dataService.init(AppSession.firebaseURL);
+	//dataService.setToScope($scope, 'data');
+
+
 
 }]);
 

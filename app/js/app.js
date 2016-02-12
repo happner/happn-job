@@ -46,49 +46,49 @@ ideApp.directive ('compileHtml', function($compile) {
 	  }
 	}});
 
-var registerFirebaseService = function (serviceName) {
-	ideApp.factory(serviceName, function (angularFire) {
-        var _url = null;
-        var _ref = null;
+// var registerFirebaseService = function (serviceName) {
+// 	ideApp.factory(serviceName, function (angularFire) {
+//         var _url = null;
+//         var _ref = null;
 
-        return {
-            init: function (url, force) {
-            	if (_url == null || force)
-            	{
-            		_url = url;
-                    _ref = new Firebase(_url);
-            	}
-            },
-            setToScope: function (scope, localScopeVarName) {
-                angularFire(_ref, scope, localScopeVarName);
-            },
-            traverse:function(data, path, done){
-            	try
-            	{
-            		var currentNode = data;
-            		var found = false;
+//         return {
+//             init: function (url, force) {
+//             	if (_url == null || force)
+//             	{
+//             		_url = url;
+//                     _ref = new Firebase(_url);
+//             	}
+//             },
+//             setToScope: function (scope, localScopeVarName) {
+//                 angularFire(_ref, scope, localScopeVarName);
+//             },
+//             traverse:function(data, path, done){
+//             	try
+//             	{
+//             		var currentNode = data;
+//             		var found = false;
 
-            		if (path[0] == '/')
-            			path = path.substring(1, path.length);
+//             		if (path[0] == '/')
+//             			path = path.substring(1, path.length);
 
-                	path.split('/').map(function(current, index, arr){
-                		currentNode = currentNode[current];
-                		if (index + 1 == arr.length && currentNode){
-                			found = true;
-                			done(null, currentNode);
-                		}
-                	});
+//                 	path.split('/').map(function(current, index, arr){
+//                 		currentNode = currentNode[current];
+//                 		if (index + 1 == arr.length && currentNode){
+//                 			found = true;
+//                 			done(null, currentNode);
+//                 		}
+//                 	});
 
-                	if (!found)
-                		done(null, null);
-            	}catch(e){
-            		done(e);
-            	}
+//                 	if (!found)
+//                 		done(null, null);
+//             	}catch(e){
+//             		done(e);
+//             	}
 
-            }
-        };
-    });
-};
+//             }
+//         };
+//     });
+// };
 
 var registerDataService = function (serviceName) {
   ideApp.factory(serviceName, function (happnClient) {
@@ -127,9 +127,9 @@ var registerDataService = function (serviceName) {
     });
 };
 
-registerDataService('happnService');
+registerDataService('dataService');
 
-registerFirebaseService('dataService');
+//registerFirebaseService('dataService');
 
 ideApp.factory('AppSession', function($rootScope) {
 	  return {

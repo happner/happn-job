@@ -11,8 +11,6 @@ angular.module('happn', [])
       connect:function(host, port, username, password, done){
         var _this = this;
 
-        console.log('in connect method', wind.HappnClient);
-
         wind.HappnClient.create({
           config:{host:host, port:port, username:username, password:password},
           secure:true
