@@ -1,42 +1,22 @@
-ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', function($scope, $modalInstance, data) {
+ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', 'args', 'dataService', function($scope, $modalInstance, data, args, dataService) {
 
-	$scope.click = function(arg) {
-	    alert('Clicked ' + arg);
-	}
-	$scope.html = '<a ng-click="click(1)" href="#">Click me</a>';
+	console.log('step edit:::', args);
 
-	  $scope.data = data;
-	  $scope.message = {type:'alert-warning', message:'', display:'none'};
-	  $scope.step = {name:'', description:'', project:'', src:'', type: 'shape', editable:true};
+	$scope.data = data;
+	$scope.message = {type:'alert-warning', message:'', display:'none'};
+	$scope.step = {name:'', description:'', project:'', src:'', type: 'shape', editable:true};
 
-	  var showMessage = function(type, message){
+	var showMessage = function(type, message){
 		  $scope.message.type = type;
 		  $scope.message.message = message;
 		  $scope.message.display = 'block';
-	  };
+	};
 
-	  $scope.getArray = function(items){
-		  var returnArray = [];
-		  for (var itemName in items)
-			  returnArray.push(itemName);
-		  return returnArray;
-	  };
-
-	  $scope.projectSelected = function(){
-	  	if ($scope.shape.project){
-	  		$scope.controls = data.Projects[$scope.shape.project].Controls;
-	  		$scope.operations = data.Projects[$scope.shape.project].Operations;
-	  	}else{
-	  		$scope.controls = {};
-	  		$scope.operations = {};
-	  	}
-	  }
-
-	  function validate(){
+	function validate(){
 	  	return true;
-	  }
+	}
 
-	  $scope.ok = function () {
+	$scope.ok = function () {
 
 		console.log('$scope.data');
 		console.log($scope.data);
@@ -51,10 +31,27 @@ ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', func
 			$modalInstance.close('New shape added OK');
 		}
 
-	  };
+	};
 
-	  $scope.cancel = function () {
+	$scope.cancel = function () {
 	    $modalInstance.dismiss('cancel');
-	  };
+	};
+
+	dataService.traverse(data, args.path, function(e, shape){
+		if (!e){
+			console.log('shape:::', shape);
+			dataService.traverse(data, '/Projects/' + shape.meta.project + '/Controls/' + shape.meta.control, function(e, control){
+				if (!e){
+					console.log('control:::', control);
+					dataService.traverse(data, '/Projects/' + shape.meta.project + '/Operations/' + shape.meta.operation, function(e, operation){
+						if (!e){
+							console.log('operation:::', operation);
+							$scope.html = base64.decode(control.meta.currentCode);
+						}
+					})
+				}
+			})
+		}
+	})
 
 }]);

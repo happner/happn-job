@@ -13,7 +13,8 @@ var ideApp = angular.module('ideApp', [
   'angularBootstrapNavTree',
   'ui.ace',
   'ui.jsPlumb',
-  'ngDragDrop'
+  'ngDragDrop',
+  'happn'
 ]);
 
 ideApp.directive('dynamic', function ($compile) {
@@ -88,6 +89,45 @@ var registerFirebaseService = function (serviceName) {
         };
     });
 };
+
+var registerDataService = function (serviceName) {
+  ideApp.factory(serviceName, function (happnClient) {
+        var _happn = null;
+
+        return {
+            instance:happnClient,
+            init: function (host, port, username, password, done) {
+              happnClient.connect(host, port, username, password, done);
+            },
+            traverse:function(data, path, done){
+              try
+              {
+                var currentNode = data;
+                var found = false;
+
+                if (path[0] = '/')
+                  path = path.substring(1, path.length);
+
+                  path.split('/').map(function(current, index, arr){
+                    currentNode = currentNode[current];
+                    if (index + 1 == arr.length && currentNode){
+                      found = true;
+                      done(null, currentNode);
+                    }
+                  });
+
+                  if (!found)
+                    done(null, null);
+              }catch(e){
+                done(e);
+              }
+
+            }
+        };
+    });
+};
+
+registerDataService('happnService');
 
 registerFirebaseService('dataService');
 

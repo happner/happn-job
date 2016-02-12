@@ -13,12 +13,12 @@ module.directive('abnTree', function($timeout) {
       initialSelection: '='
     },
     link: function(scope, element, attrs) {
-    	
+
       var expand_level, for_each_branch, on_treeData_change, select_branch, selected_branch;
-      
+
       //console.log('scope.metaData');
       //console.log(scope.metaData);
-      
+
       if (attrs.iconExpand == null) {
         attrs.iconExpand = 'icon-plus';
       }
@@ -33,7 +33,7 @@ module.directive('abnTree', function($timeout) {
       }
       expand_level = parseInt(attrs.expandLevel, 10);
       scope.header = attrs.header;
-      
+
       //console.log('treedata in scope');
       //console.log(scope.treeData);
 
@@ -43,8 +43,8 @@ module.directive('abnTree', function($timeout) {
         debugger;
         return;
       }
-      
-      
+
+
       if (scope.treeData.length == null) {
         if (scope.treeData.label != null) {
           scope.treeData = [scope.treeData];
@@ -55,7 +55,7 @@ module.directive('abnTree', function($timeout) {
         }
       }
       */
-      
+
       for_each_branch = function(f) {
         var do_f, root_branch, _i, _len, _ref, _results;
         do_f = function(branch, level) {
@@ -63,10 +63,10 @@ module.directive('abnTree', function($timeout) {
           f(branch, level);
           if (branch.children != null) {
             _ref = branch.children;
-            
+
             //console.log('branch.children');
             //console.log(branch.children);
-            
+
             _results = [];
             for (var property in _ref) {
               child = _ref[property];
@@ -83,7 +83,7 @@ module.directive('abnTree', function($timeout) {
         }
         return _results;
       };
-      
+
       /*
       if (scope.treeData) {
     	  //console.log('scope.treeData not null')
@@ -93,9 +93,9 @@ module.directive('abnTree', function($timeout) {
 	      });
       }
       */
-      
+
       selected_branch = null;
-      
+
       select_branch = function(branch) {
         if (branch !== selected_branch) {
           if (selected_branch != null) {
@@ -103,9 +103,9 @@ module.directive('abnTree', function($timeout) {
           }
           branch.selected = true;
           selected_branch = branch;
-          
+
           //$rootScope.selected_branch = branch;
-          
+
           if (branch.onSelect != null) {
             return $timeout(function() {
               return branch.onSelect(branch);
@@ -121,42 +121,42 @@ module.directive('abnTree', function($timeout) {
           }
         }
       };
-      
+
       scope.user_expands_or_contracts_branch = function(branch){
-    	  
+
     	  /*
     	  if (branch.expanded)
     		  //console.log('branch expanded');
     	  else
     		  //console.log('branch contracted');
     	  */
-    	  
+
     	  return scope.onExpandOrContract({
               branch: branch
           });
-    	  
+
       }
-      
+
       scope.user_clicks_branch = function(branch) {
-    	   
+
         if (branch !== selected_branch) {
           return select_branch(branch);
         }
       };
-     
+
      var property_is_meta = function(property) {
-    	 if (property != 'path' && 
-        	  property != 'expanded' && 
+    	 if (property != 'path' &&
+        	  property != 'expanded' &&
         	  property != 'selected' &&
         	  property != 'meta')
     		 return false;
     	 else
     		 return true;
- 
+
      }
-      
+
      var branch_has_children = function(branch) {
-    	 
+
     	// debugger;
     	 if (typeof branch === 'object')
          {
@@ -165,27 +165,27 @@ module.directive('abnTree', function($timeout) {
 	   	        	 return true;
          	  }
          }
-        
+
          return false;
      }
-      
+
       scope.tree_rows = [];
       on_treeData_change = function() {
-    	  
+
     	//console.log('scope.treeData');
     	//console.log(scope.treeData);
-    	
+
     	//console.log('scope.meta');
     	//console.log(scope.meta);
-    	
+
     	if (scope.treeData == null)
     		return;
-    	  
+
     	//console.log('scope.treeData or meta has changed - moving on down');
-    	
+
         var add_branch_to_list, root_branch, _i, _len, _ref, _results;
         scope.tree_rows = [];
-        
+
         /*
         for_each_branch(function(branch) {
           if (branch.children) {
@@ -206,34 +206,34 @@ module.directive('abnTree', function($timeout) {
           }
         });
         */
-        
+
         add_branch_to_list = function(level, name, branch, parentbranch, visible) {
           var child, child_visible, tree_icon, _i, _len, _ref, _results;
-          
+
           //console.log('add_branch_to_list');
           //console.log(branch);
-          
+
           if (parentbranch == null)
         	  branchpath = '/' + name;
           else
         	  branchpath = parentbranch.path + '/' + name;
-          
+
           if (scope.metaData && scope.metaData.expanded[branchpath] != null) {
             branch.expanded = true;
           }
-          
+
           var branch_selected = false;
-          
+
           if (scope.metaData && scope.metaData.selected == branchpath)
           {
         	  branch_selected = true;
         	  //console.log('BRANCH ' + branchpath + ' selected');
           }
-          
+
           if (typeof branch === 'object')
           {
         	  branch.selected = branch_selected;
-        	  
+
         	  if (branch_has_children(branch))
         	  {
         		  if (branch.expanded)
@@ -243,7 +243,7 @@ module.directive('abnTree', function($timeout) {
         	  }
         	  else
         		  tree_icon = attrs.iconLeaf;
-        	 
+
           }
           else
           {
@@ -252,21 +252,21 @@ module.directive('abnTree', function($timeout) {
         	  name = name + ':' + branch;
         	  branch = {selected:branch_selected};
           }
-        	 
+
           branch.path = branchpath;
-          
+
           //console.log('path');
           //console.log(branch.path);
-          
+
           var tree_row = {level: level,
                   		  branch: branch,
                   		  label: name,
                   		  tree_icon: tree_icon,
                   		  visible: visible};
-          
+
           scope.tree_rows.push(tree_row);
           _results = [];
-          
+
       	  for (var property in branch) {
 	          if (!property_is_meta(property))
 	          {
@@ -276,12 +276,12 @@ module.directive('abnTree', function($timeout) {
 	              //console.log(child);
 	              //console.log(_results);
 	              _results.push(add_branch_to_list(level + 1, property, child, branch, child_visible));
-	          }   
+	          }
       	  }
       	  return _results;
          };
 
-        
+
         //console.log(scope.treeData);
         _ref = angular.copy(scope.treeData);
         _results = [];
@@ -291,7 +291,7 @@ module.directive('abnTree', function($timeout) {
         }
         return _results;
       };
-      
+
       /*
       if (attrs.initialSelection != null) {
         for_each_branch(function(b) {
@@ -301,10 +301,10 @@ module.directive('abnTree', function($timeout) {
         });
       }
       */
-      
+
       //console.log('doing watch');
       scope.$watch('metaData', on_treeData_change, true);
-      
+
       return scope.$watch('treeData', on_treeData_change, true);
     }
   };

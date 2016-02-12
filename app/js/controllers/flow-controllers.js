@@ -91,6 +91,7 @@ ideControllers.controller('flow_edit', ['$scope',
             var shapeId = $data.branch.meta.name + $scope.shapeCounters[$data.branch.meta.name];
 
             var shape = {
+                path:$data.branch.path,
                 id: shapeId.replace(/ /g, ''),
                 label: shapeId,
                 icon: '',
@@ -128,8 +129,17 @@ ideControllers.controller('flow_edit', ['$scope',
 			}
 
             if (event == "shape-clicked"){
-                console.log(params);
-                $scope.openNewModal('Edit step', 'step_edit');
+
+                var handler = {
+                     saved:function(result){
+                        $log.info('step saved:::: ' + new Date());
+                     },
+                     dismissed:function(){
+                         $log.info('Modal dismissed at: ' + new Date());
+                     }
+                };
+
+                return $scope.openModal('../templates/step_edit.html', 'step_edit', handler, params);
             }
         }
 
