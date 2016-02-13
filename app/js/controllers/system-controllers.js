@@ -1,48 +1,18 @@
 'use strict';
 
-/* Controllers */
-ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'angularFire', 'dataService', 'AppSession',
-  function($scope, $rootScope, angularFire, dataService, AppSession) {
+ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce', 'dataService', '$rootScope', function($scope, $modal, $log, $sce, dataService, $rootScope) {
 
-	$scope.on_expand_or_contract = function(branch) {
-		if (branch.expanded)
-		{
-			console.log('branch expanded');
-			$scope.meta.expanded[branch.path] = true;
-		}
-	  	else
-	  	{
-	  		console.log('branch contracted');
-	  		delete $scope.meta.expanded[branch.path];
-	  	}
-	};
+	$rootScope.data = {
+		treeNav:{
+			'Projects':{
 
-	$scope.my_tree_handler = function(branch) {
-		console.log("You selected: " + branch.path);
-		console.log(branch);
-		$scope.meta.selected = branch.path;
+			},
+			'Shapes':{
 
-		if (branch.meta && branch.meta.editable == true)
-		{
-			 $rootScope.$broadcast('editItemSelected', branch);
-			 console.log('editItemSelected event happened');
+			}
 		}
 
-	};
-
-	$scope.meta = {expanded:{}, selected:null};
-	$scope.ux_treedata = null;
-
-	// dataService.init(AppSession.firebaseURL);
-	// dataService.setToScope($scope, 'ux_treedata');
-
-	/*
-	var ref = new Firebase('https://southbite.firebaseio.com/Fire-grate');
-	angularFire(ref, $scope, "ux_treedata");
-	*/
-}]);
-
-ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce', 'dataService', 'AppSession', function($scope, $modal, $log, $sce, dataService, AppSession) {
+	}
 
 	$scope.openModal = function (templatePath, controller, handler, args) {
 		    var modalInstance = $modal.open({
@@ -93,42 +63,63 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 		dataService.instance.client.get('/Project/*', function(e, projects){
 
-			console.log('got projects:::', projects);
+			projects.map(function(project){
+				console.log('adding proj');
+				$rootScope.data.treeNav.Projects[project.name] = project;
+			});
+
+			$rootScope.$apply();
 
 		});
 
 	});
 
-	//mmm..http://stackoverflow.com/questions/17386820/how-do-i-dynamically-load-multiple-templates-using-angularjs
-	//dataService.init(AppSession.firebaseURL);
-	//dataService.setToScope($scope, 'data');
-
-
 
 }]);
 
-ideControllers.controller('ContentController', ['$scope', '$modal', '$log', 'dataService', 'AppSession', function($scope, $modal, $log, dataService, AppSession) {
+/* Controllers */
+ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataService',
+
+  function($scope, $rootScope, dataService) {
+
+	$scope.on_expand_or_contract = function(branch) {
+		if (branch.expanded)
+		{
+			$scope.meta.expanded[branch.path] = true;
+		}
+	  	else
+	  	{
+	  		delete $scope.meta.expanded[branch.path];
+	  	}
+	};
+
+	$scope.my_tree_handler = function(branch) {
+
+		$scope.meta.selected = branch.path;
+		if (branch._meta)
+			 $rootScope.$broadcast('editItemSelected', branch);
+
+	};
+
+	$scope.meta = {expanded:{}, selected:null};
+	$scope.ux_treedata = $rootScope.data.treeNav;
+
+}]);
+
+ideControllers.controller('ContentController', ['$scope', '$modal', '$log', 'dataService',
+	function($scope, $modal, $log, dataService) {
 
 	  $scope.action_selected = function(action){
 		  action.handler();
 	  };
 
-	  $scope.$on('editItemSelected', function(event, args) {
-		  dataService.traverse($scope.data, args.path, function(e, node){
-			  if (!e){
-				  $scope.editData = node;
-				  $scope.templatePath = '../templates/' + args.meta.type + '_edit.html';
-				  $scope.eventArgs = args;
-				  $scope.$apply();
-				  console.log('applied');
-				  console.log($scope.editData);
-				  console.log($scope.templatePath);
-			  }else{
-				  //TODO error handling?
-				  throw e;
-			  }
+	  $scope.$on('editItemSelected', function(event, item) {
 
-		  });
+			$scope.editData = item;
+			$scope.templatePath = '../templates/' + item.type.toLowerCase() + '_edit.html';
+			$scope.eventArgs = item;
+			$scope.$apply();
+
 	  });
 
 	  $scope.$on('editor_loaded', function(event, args) {

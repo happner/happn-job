@@ -6,7 +6,6 @@ var ideControllers = angular.module('ideControllers', []);
 
 var ideApp = angular.module('ideApp', [
   'ui.bootstrap',
-  'firebase',
   'ngAnimate',
   'ideControllers',
   'ideServices',

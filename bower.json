@@ -1,0 +1,20 @@
+{
+  "name": "happn-job",
+  "version": "0.0.1",
+  "homepage": "https://github.com/FieldServer/happn-job",
+  "description": "happn-job",
+  "authors": [
+    "southbite"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "app/lib/components",
+    "test"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.5.0"
+  }
+}

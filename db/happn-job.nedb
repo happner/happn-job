@@ -1,6 +1,6 @@
-{"_id":"/Project/NkguHVvqe","data":{"name":"test1","description":"test1"},"created":1455310415928,"modified":1455310415928}
-{"_id":"/_SYSTEM/_NETWORK/_SETTINGS/NAME","data":{"value":"coralqueen_E11LrEDce"},"created":1455310382222,"modified":1455310382222}
-{"_id":"/_SYSTEM/_SECURITY/_GROUP/_ADMIN","data":{"custom_data":{"description":"the default administration group for happn"},"name":"_ADMIN","permissions":{"*":{"actions":["*"]}}},"created":1455310382263,"modified":1455310382263}
-{"_id":"/_SYSTEM/_SECURITY/_SETTINGS/KEYPAIR","data":{"value":"{\"privateKey\":\"EXV1iRUavhJfd9NYkddWquAUBrvqRQyw+6P7H6em1xI=\",\"publicKey\":\"AmxxINrXy2dZFpAqh30zB++kePcXyrun8fcttqSN0Leu\"}"},"created":1455310382259,"modified":1455310382259}
-{"_id":"/_SYSTEM/_SECURITY/_USER/_ADMIN","data":{"custom_data":{},"username":"_ADMIN","password":"pbkdf2$10000$8a8ec43b8a67647c01aa87534564baae4b7743b5faf7d1073e4fe2957e1cd2712e98d0d392f66ac600c0bb7db6a3b405c1ef388eabd8c03f193b79d20e7fde4d$ccd58a910c5abc0f78a02bfa494e9d0f18a940d0f32505a84c9a58209ffc1bb14a54cb957846273afb8be1a80f13e2d994710a9bffa5b7477e8e723158038b73"},"created":1455310382297,"modified":1455310382297}
-{"_id":"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN","data":{},"created":1455310382299,"modified":1455310382299}
+{"_id":"/Project/NyMbn4_ql","data":{"name":"test1","description":"test1 desc","type":"Project"},"created":1455377633616,"modified":1455377633616}
+{"_id":"/_SYSTEM/_NETWORK/_SETTINGS/NAME","data":{"value":"mangoraven_EyEln4Oqg"},"created":1455377619678,"modified":1455377619678}
+{"_id":"/_SYSTEM/_SECURITY/_GROUP/_ADMIN","data":{"custom_data":{"description":"the default administration group for happn"},"name":"_ADMIN","permissions":{"*":{"actions":["*"]}}},"created":1455377619720,"modified":1455377619720}
+{"_id":"/_SYSTEM/_SECURITY/_SETTINGS/KEYPAIR","data":{"value":"{\"privateKey\":\"35zAmMzQmU0TNZb3X5N+hl2M4hPuVuMM9suU/qQ+toU=\",\"publicKey\":\"A5u433SixbqkHuvdV+xspi6V4MnY3WkCEKvPecGy1QZF\"}"},"created":1455377619717,"modified":1455377619717}
+{"_id":"/_SYSTEM/_SECURITY/_USER/_ADMIN","data":{"custom_data":{},"username":"_ADMIN","password":"pbkdf2$10000$6a10fa121e10b646e9d998ee0be5647c6ef431db7d345cef6d87bb39740be8bf7b31f651f28b40c6c16b0b1d842042e16f1f00735ea81cfb19782723bcb86dfa$b0a323b054413f355b12a669a252bc814851d238b12877eaa029033453ae0488dc131523c70f8a6c6352302ed86cf412a0be42e8fba546d2a4e87fb4c0539a7f"},"created":1455377619755,"modified":1455377619755}
+{"_id":"/_SYSTEM/_SECURITY/_USER/_ADMIN/_USER_GROUP/_ADMIN","data":{},"created":1455377619757,"modified":1455377619757}
