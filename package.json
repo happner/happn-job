@@ -8,10 +8,8 @@
     "expect": "0.0.2",
     "expect.js": "~0.2.0",
     "express": "~3.3.8",
-    "firebase": "~0.6.3",
-    "firebase-token-generator": "~0.1.4",
     "github": "~0.1.12",
-    "happn": "^2.4.4",
+    "happn": "^2.4.5",
     "serve-static": "^1.10.2"
   },
   "devDependencies": {

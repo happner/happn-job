@@ -189,17 +189,16 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
   	function contractBranch(branch, done){
 
   		if (eventHandlers[branch._meta.path] >= 0){
-  			dataService.instance.client.off(eventHandlers[branch._meta.path], function(e){
 
-	  			console.log('ds off:::', e);
+  			dataService.instance.client.off(eventHandlers[branch._meta.path], function(e){
 
 	  			if (e) return done(e);
 	  			delete eventHandlers[branch._meta.path];
 	  			done();
 
 	  		});
-	  		else done();
-  		}
+
+  		}else done();
 
   	}
 
