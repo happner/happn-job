@@ -3,18 +3,35 @@
 ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce', 'dataService', '$rootScope', function($scope, $modal, $log, $sce, dataService, $rootScope) {
 
 	$rootScope.data = {
-		treeNav:{
+		cache:{
 			'Projects':{
 
 			},
-			'Shapes':{
+			'Deployments':{
+
+			},
+			'Personnel':{
 
 			}
-		}
+		},
+		message:{
+			message:'',
+			display:'none',
+			type:'alert-info'
+		},
+		templatePath:''
+	}
+
+	$rootScope.updateData = function(item){
+		console.log('updating data:::', item);
+
+		if (item.type == 'Project')
+			$rootScope.addCachedItem($rootScope.data.cache.Projects, 'Project', item);
 
 	}
 
-	$scope.openModal = function (templatePath, controller, handler, args) {
+	$rootScope.openModal = function (templatePath, controller, handler, args) {
+
 		    var modalInstance = $modal.open({
 		      templateUrl: templatePath,
 		      controller: controller,
@@ -32,30 +49,58 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
     	  modalInstance.result.then(handler.saved, handler.dismissed);
 	};
 
-	$scope.openNewModal = function (type, action) {
+	$rootScope.openNewModal = function (type, action) {
 
 		 var handler = {
 				 saved:function(result){
-					 $scope.selected = selectedItem;
+				 	$rootScope.updateData(result);
 				 },
 				 dismissed:function(){
 					 $log.info('Modal dismissed at: ' + new Date());
 				 }
 		 };
 
-		 return $scope.openModal('../templates/' + action + '.html', action.toString(), handler);
+		 var controller = type + '_' + action;
+		 return $scope.openModal('../templates/' + controller + '.html', controller, handler);
 	};
 
-	$scope.to_trusted = function(html_code) {
+	$rootScope.to_trusted = function(html_code) {
 		  return $sce.trustAsHtml(html_code);
 	};
 
-	$scope.toArray = function(items){
+	$rootScope.toArray = function(items){
 		  var returnArray = [];
 		  for (var item in items)
 			  returnArray.push(item);
 		  return returnArray;
 	};
+
+	$rootScope.getArray = function(items){
+		var returnArray = [];
+		for (var itemName in items)
+			  returnArray.push(itemName);
+		return returnArray;
+	};
+
+	$rootScope.addCachedItem = function(cacheLocation, type, item){
+		cacheLocation[item.name] = {_meta:item._meta, name:item.name, description:item.description, type:type};
+	}
+
+	$rootScope.notify = function(message, type, hide){
+		if (!type) type = 'info';
+		if (hide) hide = 0;
+
+		$rootScope.data.message.type = 'alert-' + type;
+		$rootScope.data.message.message = message;
+		$rootScope.data.message.display = 'inline-block';
+
+		$rootScope.$apply();
+
+		if (hide) setTimeout(function(){
+			$rootScope.data.message.display = 'none';
+			$rootScope.$apply();
+		}, hide);
+	}
 
 	dataService.init('127.0.0.1', 3000, '_ADMIN', 'happn', function(e){
 
@@ -64,10 +109,9 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 		dataService.instance.client.get('/Project/*', function(e, projects){
 
 			projects.map(function(project){
-				console.log('adding proj');
-				$rootScope.data.treeNav.Projects[project.name] = project;
+				//cacheLocation, type, item
+				$rootScope.addCachedItem($rootScope.data.cache.Projects, 'Project', project);
 			});
-
 			$rootScope.$apply();
 
 		});
@@ -95,6 +139,8 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 
 	$scope.my_tree_handler = function(branch) {
 
+		console.log('my tree handler:::');
+
 		$scope.meta.selected = branch.path;
 		if (branch._meta)
 			 $rootScope.$broadcast('editItemSelected', branch);
@@ -102,12 +148,12 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 	};
 
 	$scope.meta = {expanded:{}, selected:null};
-	$scope.ux_treedata = $rootScope.data.treeNav;
+	$scope.ux_treedata = $rootScope.data.cache;
 
 }]);
 
-ideControllers.controller('ContentController', ['$scope', '$modal', '$log', 'dataService',
-	function($scope, $modal, $log, dataService) {
+ideControllers.controller('ContentController', ['$scope', '$rootScope', '$modal', '$log', 'dataService', '$templateCache',
+	function($scope, $rootScope, $modal, $log, dataService, $templateCache) {
 
 	  $scope.action_selected = function(action){
 		  action.handler();
@@ -115,10 +161,22 @@ ideControllers.controller('ContentController', ['$scope', '$modal', '$log', 'dat
 
 	  $scope.$on('editItemSelected', function(event, item) {
 
-			$scope.editData = item;
-			$scope.templatePath = '../templates/' + item.type.toLowerCase() + '_edit.html';
-			$scope.eventArgs = item;
-			$scope.$apply();
+	  	//$templateCache.remove('../templates/' + item.type.toLowerCase() + '_edit.html');
+	  	$rootScope.data.templatePath = '../templates/blank.html';
+		$rootScope.$apply();
+
+		console.log('editItemSelected:::',item);
+
+	  	dataService.instance.client.get(item._meta.path, function(e, data){
+
+	 		if (e) return $scope.notify('error fetching item ' + item._meta.name, 'danger');
+
+	 		$scope[item.type.toLowerCase()] = data;
+
+	 		$rootScope.data.templatePath = '../templates/' + item.type.toLowerCase() + '_edit.html';
+			$rootScope.$apply();
+
+	 	});
 
 	  });
 
@@ -135,19 +193,6 @@ ideControllers.controller('ContentController', ['$scope', '$modal', '$log', 'dat
 
 	  });
 
-
-	  /*
-	  $scope.$on('$includeContentLoaded', function(event) {
-			 console.log('$includeContentLoaded');
-			 console.log(event);
-			 console.log(event.targetScope);
-			 console.log($scope);
-			 $scope.actions = event.targetScope.actions;
-
-			 console.log('$scope.actions');
-			 console.log($scope.actions);
-	  });
-	  */
 }]);
 
 

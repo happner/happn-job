@@ -148,7 +148,10 @@ module.directive('abnTree', function($timeout) {
     	 if (property != 'path' &&
         	  property != 'expanded' &&
         	  property != 'selected' &&
-        	  property != 'meta')
+            property != 'type' &&
+            property != 'name' &&
+            property != 'description' &&
+        	  property != '_meta')
     		 return false;
     	 else
     		 return true;

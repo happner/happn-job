@@ -4,13 +4,24 @@
 
 var ideServices = angular.module('ideServices', []);
 
-ideServices.factory('ideHelper', function() {
-	 return {
-		 toPropertyNameArray:function(obj){
-			 var returnArray = [];
-			  for (var prop in obj)
-				  returnArray.push(prop);
-			  return returnArray;
-		 }
+ideServices.service('utils', ['$rootScope', function($rootScope) {
+
+	this.toPropertyNameArray = function(obj){
+		var returnArray = [];
+
+		for (var prop in obj)
+			returnArray.push(prop);
+		return returnArray;
 	 }
-});
+
+	this.toArray = function(obj){
+		var returnArray = [];
+
+	  	for (var prop in obj)
+		  returnArray.push(obj[prop]);
+
+		return returnArray;
+	}
+
+
+}]);

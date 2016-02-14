@@ -48,12 +48,12 @@
 		   <span class="dropdown actions-span">
 			  <i href="#" class="dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown"></i>
 				 <ul class="dropdown-menu" >
-		          <li><a style="cursor:pointer" ng-click="openNewModal('Project', 'project_new')">Project</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('Operation', 'operation_new')">Operation</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('Control', 'control_new')">Control</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('Shape', 'shape_new')">Shape</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('Feed', 'feed_new')">Feed</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('Flow', 'flow_new')">Flow</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('project', 'new')">Project</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('operation', 'new')">Operation</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('control', 'new')">Control</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('shape', 'new')">Shape</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('feed', 'new')">Feed</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('flow', 'new')">Flow</a></li>
 		        </ul>
 			</span>
 		</div>
@@ -61,10 +61,11 @@
    	  <abn-tree tree-data="ux_treedata" meta-data="meta" icon-expand="fa fa-plus-square" icon-collapse="fa fa-minus-square" icon-leaf="" on-select="my_tree_handler(branch)" on-expand-or-contract="on_expand_or_contract(branch)" expand-level="3"></abn-tree>
 	  </div>
 	  <div class="col-md-9 content" ng-controller="ContentController">
+	  	<div style="display:{{data.message.display}};position:absolute;bottom:5px;right:5px" class="alert {{data.message.type}}">{{data.message.message}}</div>
 	 	<span class="content-actions" style="display:{{actions_display}};position:absolute;z-index:9999999999;top:0px;right:0px" id="span_content_actions">
 	 		<i ng-repeat="action in actions" ng-click="action_selected(action)" class="content-action {{action.cssClass}}"></i>
 	 	</span>
-	 	<div ng-include src="templatePath"></div>
+	 	<div ng-include src="data.templatePath"></div>
 	  </div>
 	</div>
 
@@ -78,7 +79,7 @@
 	        <br>
 	      </div>
 	      <div class="modal-body">
-
+	      	<div style="display:{{data.message.display}};position:absolute;bottom:5px;right:5px" class="alert {{data.message.type}}">{{data.message.message}}</div>
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->

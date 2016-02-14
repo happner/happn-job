@@ -132,8 +132,7 @@ registerDataService('dataService');
 
 ideApp.factory('AppSession', function($rootScope) {
 	  return {
-		firebaseURL: 'https://southbite.firebaseio.com/One-liner',
-		//currently what path are we editing
+		  //currently what path are we editing
 	    currentPath: '',
 	    //data that is being currently edited, keyed by the path of the item
 	    dirty:{},

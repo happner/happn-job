@@ -3,23 +3,19 @@ ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataServi
 	  $scope.message = {type:'alert-warning', message:'', display:'none'};
 	  $scope.project = {name:'', description:'', type:'Project'};
 
-	  var showMessage = function(type, message){
-		  $scope.message.type = type;
-		  $scope.message.message = message;
-		  $scope.message.display = 'block';
-	  };
-
 	  $scope.ok = function () {
 
-	  	dataService.instance.client.get('/Projects/' + $scope.project.name, function(e, project){
+	  	dataService.instance.client.get('/Project/*', {criteria:{name:$scope.project.name}}, function(e, projects){
 
-	  		if (e) return showMessage('alert-danger','error validating save: ' + e.toString())
+	  		console.log(e, projects);
 
-	  		if (project) return showMessage('alert-warning', 'A project by this name already exists');
+	  		if (e) return $scope.notify('error validating save: ' + e.toString(), 'danger');
+
+	  		if (projects.length > 0) return $scope.notify('A project by this name already exists', 'warning');
 
 	  		dataService.instance.client.setSibling('/Project', $scope.project, function(e, newProject){
 
-	  			if (e) return showMessage('alert-danger','error saving project: ' + e.toString())
+	  			if (e) return $scope.notify('error saving project: ' + e.toString(), 'danger');
 
 	  			$modalInstance.close(newProject);
 
@@ -35,31 +31,19 @@ ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataServi
 
 }]);
 
-ideControllers.controller('project_edit', ['$scope', function($scope) {
+ideControllers.controller('project_edit', ['$scope', 'dataService', function($scope, dataService) {
 
-	 $scope.project =  angular.copy($scope.editData);
-
-	 $scope.getArray = function(items){
-		  var returnArray = [];
-		  for (var itemName in items)
-			  returnArray.push(itemName);
-		  return returnArray;
-	  };
-
-
-	 var onSave = function(args){
+	var onSave = function(args){
 		 console.log('onSave clicked ');
 		 console.log($scope.editData);
 
 		 $scope.editData.meta = $scope.project;
-	 };
+	};
 
-	 var onDelete = function(args){
+	var onDelete = function(args){
 		 console.log('onDelete clicked ');
 		 console.log($scope.editData);
-
-
-	 };
+	};
 
 	var actions = [
 	{
@@ -73,8 +57,8 @@ ideControllers.controller('project_edit', ['$scope', function($scope) {
  		cssClass:'glyphicon glyphicon-remove'
 	}];
 
-	 $scope.actions = actions;
-	 $scope.$emit('editor_loaded', actions);
-	 console.log('project_edit controller loaded');
+ 	$scope.actions = actions;
+ 	$scope.$emit('editor_loaded', actions);
+
 
 }]);
