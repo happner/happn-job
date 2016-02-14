@@ -26,8 +26,23 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 		console.log('updating data:::', item);
 
 		if (item.type == 'Project')
-			$rootScope.addCachedItem($rootScope.data.cache.Projects, 'Project', item);
+			return $rootScope.addProject(item);
 
+		if (item.type == 'Control'){
+			//return $rootScope.addCachedItem($rootScope.data.cache.Projects, 'Project', item);
+
+		}
+
+
+	}
+
+	$rootScope.addProject = function(project){
+
+		project.Operations = {};
+		project.Controls = {};
+		project.Shapes = {};
+
+		return $rootScope.data.cache.Projects[project.name] = project;
 	}
 
 	$rootScope.openModal = function (templatePath, controller, handler, args) {
@@ -87,6 +102,7 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 	}
 
 	$rootScope.notify = function(message, type, hide){
+
 		if (!type) type = 'info';
 		if (hide) hide = 0;
 
@@ -98,7 +114,6 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 		if (hide) setTimeout(function(){
 			$rootScope.data.message.display = 'none';
-			$rootScope.$apply();
 		}, hide);
 	}
 
@@ -106,49 +121,19 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 		if (e) throw e;
 
-		dataService.instance.client.get('/Project/*', function(e, projects){
+		dataService.instance.client.get('/PROJECTS/Project/*', {"criteria":{"type":"Project"}}, function(e, projects){
 
 			projects.map(function(project){
 				//cacheLocation, type, item
-				$rootScope.addCachedItem($rootScope.data.cache.Projects, 'Project', project);
+				$rootScope.addProject(project);
 			});
+
 			$rootScope.$apply();
 
 		});
 
 	});
 
-
-}]);
-
-/* Controllers */
-ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataService',
-
-  function($scope, $rootScope, dataService) {
-
-	$scope.on_expand_or_contract = function(branch) {
-		if (branch.expanded)
-		{
-			$scope.meta.expanded[branch.path] = true;
-		}
-	  	else
-	  	{
-	  		delete $scope.meta.expanded[branch.path];
-	  	}
-	};
-
-	$scope.my_tree_handler = function(branch) {
-
-		console.log('my tree handler:::');
-
-		$scope.meta.selected = branch.path;
-		if (branch._meta)
-			 $rootScope.$broadcast('editItemSelected', branch);
-
-	};
-
-	$scope.meta = {expanded:{}, selected:null};
-	$scope.ux_treedata = $rootScope.data.cache;
 
 }]);
 
@@ -195,8 +180,95 @@ ideControllers.controller('ContentController', ['$scope', '$rootScope', '$modal'
 
 }]);
 
+ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataService',
 
-ideControllers.controller('ModalContentController', ['$scope', '$modal', '$log', 'dataService', 'AppSession', function($scope, $modal, $log, dataService, AppSession) {
+  function($scope, $rootScope, dataService) {
+
+  	var eventHandlers = {};
+
+  	function contractBranch(branch, done){
+
+  		if (eventHandlers[branch._meta.path] >= 0){
+  			dataService.instance.client.off(eventHandlers[branch._meta.path], function(e){
+
+	  			console.log('ds off:::', e);
+
+	  			if (e) return done(e);
+	  			delete eventHandlers[branch._meta.path];
+	  			done();
+
+	  		});
+	  		else done();
+  		}
+
+  	}
+
+  	function populateBranch(branch){
+
+  		if (branch.type == 'Project'){
+
+  			dataService.instance.client.on(branch._meta.path + '/*', function(data){
+		  		console.log('something happened in the project:::', data);
+		  	},
+		  	function(e, eventId){
+		  		eventHandlers[branch._meta.path] = eventId;
+		  	});
+
+  			console.log('GETTING /PROJECTS/' + branch._meta.path + '/*:::');
+
+  			dataService.instance.client.get(branch._meta.path + '/*', function(e, items){
+  				console.log('have proj items:::', items);
+  				items.map(function(item){
+  					$rootScope.data.cache.Projects[branch.name][item.type + 's'][item.name] = item;
+  				});
+
+  				$rootScope.$apply();
+  			});
+  		}
+
+  	}
+
+	$scope.on_expand_or_contract = function(branch) {
+
+		console.log('on_expand_or_contract:::', branch);
+
+		if (branch.expanded)
+		{
+			$scope.meta.expanded[branch.path] = true;
+			populateBranch(branch);
+		}
+	  	else
+	  	{
+	  		console.log('contracting:::');
+	  		contractBranch(branch, function(e){
+
+	  			if (e)
+	  				$rootScope.notify('app failure, attempting to detach from events', 'danger', 5000);
+
+	  			delete $scope.meta.expanded[branch.path];
+	  			console.log('contracted ok:::');
+	  		});
+
+	  	}
+	};
+
+	$scope.my_tree_handler = function(branch) {
+
+		console.log('my tree handler:::');
+
+		$scope.meta.selected = branch.path;
+		if (branch._meta)
+			 $rootScope.$broadcast('editItemSelected', branch);
+
+	};
+
+	$scope.meta = {expanded:{}, selected:null};
+	$scope.ux_treedata = $rootScope.data.cache;
+
+}]);
+
+
+ideControllers.controller('ModalContentController', ['$scope', '$modal', '$log', 'dataService', function($scope, $modal, $log, dataService) {
 
 	  dataService.init(AppSession.firebaseURL);
 	  dataService.setToScope($scope, 'data');

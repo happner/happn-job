@@ -5,7 +5,7 @@ ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataServi
 
 	  $scope.ok = function () {
 
-	  	dataService.instance.client.get('/Project/*', {criteria:{name:$scope.project.name}}, function(e, projects){
+	  	dataService.instance.client.get('/PROJECTS/Project/*', {criteria:{name:$scope.project.name}}, function(e, projects){
 
 	  		console.log(e, projects);
 
@@ -13,7 +13,7 @@ ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataServi
 
 	  		if (projects.length > 0) return $scope.notify('A project by this name already exists', 'warning');
 
-	  		dataService.instance.client.setSibling('/Project', $scope.project, function(e, newProject){
+	  		dataService.instance.client.setSibling('/PROJECTS/Project', $scope.project, function(e, newProject){
 
 	  			if (e) return $scope.notify('error saving project: ' + e.toString(), 'danger');
 

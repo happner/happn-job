@@ -151,6 +151,7 @@ module.directive('abnTree', function($timeout) {
             property != 'type' &&
             property != 'name' &&
             property != 'description' &&
+            property != 'project' &&
         	  property != '_meta')
     		 return false;
     	 else

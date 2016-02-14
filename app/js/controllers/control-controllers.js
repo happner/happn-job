@@ -3,15 +3,32 @@ ideControllers.controller('control_new', ['$scope', '$modalInstance', 'dataServi
 	$scope.control = {
 		name:'',
 		description:'',
-		project:''
+		project:'',
+		type:'Control'
 	}
 
 	$scope.utils = utils;
 
-	console.log('$scope.projects:::',$scope.projects);
-
 	$scope.ok = function(){
-		console.log('$scope.control:::',$scope.control);
+
+		if (!$scope.control.name) return $scope.notify('your control needs a name', 'warning');
+		if (!$scope.control.project) return $scope.notify('your control needs a project', 'warning');
+
+		dataService.instance.client.get($scope.control.project + '/Control/*', {criteria:{name:$scope.control.name}}, function(e, controls){
+
+			if (controls.length > 0) return $scope.notify('a control with this name already exists', 'warning');
+
+			dataService.instance.client.setSibling($scope.control.project + '/Control', $scope.control, function(e, newControl){
+
+	  			if (e) return $scope.notify('error saving control: ' + e.toString(), 'danger');
+
+	  			$modalInstance.close(newControl);
+
+	  		});
+
+		});
+
+		$modalInstance.close($scope.control);
 	}
 
 	 //  $scope.data = data;
