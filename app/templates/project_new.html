@@ -18,7 +18,7 @@
  </form>
 </div>
  <div class="modal-footer">
- 	 <div style="display:{{data.message.display}};position:absolute;bottom:-10px;left:5px" class="alert {{data.message.type}}">{{data.message.message}}</div>
+ 	 <div ng-include src="'../templates/notify.html'"></div>
    <i class="icon-button-large glyphicon glyphicon-ok" ng-click="ok()"></i>
  	 <i class="icon-button-large glyphicon glyphicon-remove" ng-click="cancel()"></i>
  </div>

@@ -1,5 +1,5 @@
 <div class="modal-header">
-            <h3>New flow</h3>
+            <h3>New assembly line</h3>
 </div>
 <div class="modal-body">
  <form class="form-horizontal" role="form">
@@ -23,8 +23,7 @@
        class="form-control"
        id="flowProject"
        required=true
-       ng-change="projectSelected()"
-       ng-options="proj for proj in getArray(data.Projects)">
+       ng-options="proj._meta.path as proj.name for proj in utils.toArray(data.cache.Projects)">
      </select>
     </div>
   </div>

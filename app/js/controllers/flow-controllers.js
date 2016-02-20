@@ -1,64 +1,36 @@
 
-ideControllers.controller('flow_new', ['$scope', '$modalInstance', 'data',
-    function ($scope, $modalInstance, data) {
+ideControllers.controller('flow_new', ['$scope', '$modalInstance', 'dataService', 'utils',
+    function ($scope, $modalInstance, dataService, utils) {
 
-        $scope.data = data;
-        $scope.message = {
-            type: 'alert-warning',
-            message: '',
-            display: 'none'
-        };
+        $scope.utils = utils;
+
         $scope.flow = {
             name: '',
             description: '',
             project: '',
-            type: 'flow',
-            editable: true
+            type: 'Flow'
         };
 
-        var showMessage = function (type, message) {
-            $scope.message.type = type;
-            $scope.message.message = message;
-            $scope.message.display = 'block';
-        };
+        $scope.ok = function(){
 
-        $scope.getArray = function (items) {
-            var returnArray = [];
-            for (var itemName in items)
-                returnArray.push(itemName);
-            return returnArray;
-        };
+            if (!$scope.flow.name) return $scope.notify('your assembly line needs a name', 'warning', 0, true);
+            if (!$scope.flow.project) return $scope.notify('your assembly line needs a project', 'warning', 0, true);
 
-        $scope.ok = function () {
+            dataService.instance.client.get($scope.flow.project + '/Flow/*', {criteria:{name:$scope.flow.name}}, function(e, flows){
 
-            console.log('$scope.data');
-            console.log($scope.data);
+                if (flows.length > 0) return $scope.notify('an assembly line with this name already exists', 'warning', 0, true);
 
-            console.log('$scope.flow');
-            console.log($scope.flow);
+                dataService.instance.client.setSibling($scope.flow.project + '/Flow', $scope.flow, function(e, newFlow){
 
-            var flowObj = {
-                meta: $scope.flow
-            };
-            var okToSave = false;
+                    if (e) return $scope.notify('error saving flow: ' + e.toString(), 'danger', 0, true);
 
-            if ($scope.data.Projects[$scope.flow.project]['Flows'] == null) {
-                $scope.data.Projects[$scope.flow.project]['Flows'] = {};
-                okToSave = true;
-            } else {
-                if ($scope.data.Projects[$scope.flow.project]['Flows'][$scope.flow.name] != null)
-                    showMessage('alert-warning', 'A flow by this name already exists');
-                else {
-                    okToSave = true;
-                }
-            }
+                    $modalInstance.close(newFlow);
 
-            if (okToSave) {
-                $scope.data.Projects[$scope.flow.project]['Flows'][$scope.flow.name] = flowObj;
-                $modalInstance.close('New flow added OK');
-            }
+                });
 
-        };
+            });
+
+        }
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -67,52 +39,59 @@ ideControllers.controller('flow_new', ['$scope', '$modalInstance', 'data',
     }
 ]);
 
-ideControllers.controller('flow_edit', ['$scope',
-    function ($scope) {
+ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
+    function ($scope, dataService, utils) {
 
-        console.log('$scope.editData');
-        console.log($scope.editData);
-
-        $scope.flow = angular.copy($scope.editData.meta);
         $scope.drawingMethod = {};
         $scope.shapeCounters = {};
 
-        $scope.onDrop = function ($event, $data) {
+        if ($scope.flow.drawing){
+            $scope.flow.drawing.shapes.map(function(shape){
+                if (!$scope.shapeCounters[shape])
+                    $scope.shapeCounters[shape] = 1;
 
-            console.log('onDrop happened');
-            console.log($event);
-            console.log($data);
+                $scope.shapeCounters[shape]++;
+            });
+        }
 
-            if (!$scope.shapeCounters[$data.branch.meta.name])
-                $scope.shapeCounters[$data.branch.meta.name] = 1;
+        $scope.addShape = function(shape, x, y){
+
+            console.log('adding shape:::', shape);
+
+            if (!$scope.shapeCounters[shape.name])
+                $scope.shapeCounters[shape.name] = 1;
             else
-                $scope.shapeCounters[$data.branch.meta.name]++;
+                $scope.shapeCounters[shape.name]++;
 
-            var shapeId = $data.branch.meta.name + $scope.shapeCounters[$data.branch.meta.name];
+            var shapeId = shape.name + '_' + Date.now();
 
             var shape = {
-                path:$data.branch.path,
+                control:shape.control,
+                project:shape.project,
+                directive:shape.directive,
+                path:shape.path,
                 id: shapeId.replace(/ /g, ''),
-                label: shapeId,
+                label: shape.name + $scope.shapeCounters[shape.name],
                 icon: '',
                 sourceEndPoints: [],
                 targetEndPoints: [],
                 dragdropEndPoints: ["LeftMiddle", "RightMiddle", "TopCenter", "BottomCenter"],
                 cssClass: "",
                 style: "",
-                position: "top:" + $event.layerY + "px;left:" + $event.layerX + "px"
+                position: "top:" + y + "px;left:" + x + "px"
             }
 
             $scope.flow.drawing.shapes.push(shape);
             $scope.$apply();
             $scope.drawingMethod.newShape(shape);
+        }
 
+
+        $scope.onDrop = function ($event, $data) {
+            $scope.addShape($data.branch, $event.layerX, $event.layerY);
         };
 
         $scope.drawingEvent = function (event, params) {
-
-            console.log('drawing event happened ' + event);
-            console.log(params);
 
             if (event == "connectionDragStop"){
 
@@ -132,10 +111,10 @@ ideControllers.controller('flow_edit', ['$scope',
 
                 var handler = {
                      saved:function(result){
-                        $log.info('step saved:::: ' + new Date());
+                        console.log('step updated:::', result);
                      },
                      dismissed:function(){
-                         $log.info('Modal dismissed at: ' + new Date());
+
                      }
                 };
 
@@ -148,69 +127,6 @@ ideControllers.controller('flow_edit', ['$scope',
         }
 
         if ($scope.flow.drawing == null) {
-
-        	/*
-        	 $scope.flow.drawing = {
-				id:'drawing1',
-				styles:{
-				},
-				shapeClass:'window',
-				shapes:[
-					{id:'Window1',
-					 label:'Shape 1',
-					 icon:'',
-					 sourceEndPoints:["LeftMiddle", "RightMiddle"],
-					 targetEndPoints:["TopCenter", "BottomCenter"],
-					 cssClass:"",
-					 style:"",
-					 position:"top:34em;left:5em"},
-					{id:'Window2',
-					 label:'Shape 2',
-					 icon:'',
-					 sourceEndPoints:["LeftMiddle", "BottomCenter"],
-					 targetEndPoints:["TopCenter", "RightMiddle"],
-					 cssClass:"",
-					 style:"",
-					 position:"top:7em; left:36em;"},
-					{id:'Window3',
-					 label:'Shape 3',
-					 icon:'',
-					 sourceEndPoints:["RightMiddle", "BottomCenter"],
-					 targetEndPoints:["LeftMiddle", "TopCenter"],
-					 cssClass:"",
-					 style:"",
-					 position:"top:27em;left:48em;"},
-					{id:'Window4',
-					 label:'Shape 4',
-					 icon:'',
-					 sourceEndPoints:["TopCenter", "BottomCenter"],
-					 targetEndPoints:["LeftMiddle", "RightMiddle"],
-					 cssClass:"",
-					 style:"",
-					 position:"top:23em; left:22em;"}
-
-				],
-				connections:[
-
-					{uuids:["Window2BottomCenter", "Window3TopCenter"], editable:true},
-					{uuids:["Window2LeftMiddle", "Window4LeftMiddle"], editable:true},
-					{uuids:["Window4TopCenter", "Window4RightMiddle"], editable:true},
-					{uuids:["Window3RightMiddle", "Window2RightMiddle"], editable:true},
-					{uuids:["Window4BottomCenter", "Window1TopCenter"], editable:true},
-					{uuids:["Window3BottomCenter", "Window1BottomCenter"], editable:true}
-
-				],
-				config:{
-					DragOptions : { cursor: 'pointer', zIndex:2000 },
-					// the overlays to decorate each connection with.  note that the label overlay uses a function to generate the label text; in this
-					// case it returns the 'labelText' member that we set on each connection in the 'init' method below.
-					ConnectionOverlays : [
-						[ "PlainArrow", { location:1, width:15, length:15 } ]
-					]
-				}
-			};
-			*/
-
 
             $scope.flow.drawing = {
             	id:'sector_0_0',
@@ -232,8 +148,7 @@ ideControllers.controller('flow_edit', ['$scope',
                     ]
                 }
             }
-        }else
-        	console.log($scope.flow.drawing);
+        }
 
         $scope.getArray = function (items) {
             var returnArray = [];
@@ -252,17 +167,13 @@ ideControllers.controller('flow_edit', ['$scope',
         }
 
         var onSave = function (args) {
-            console.log('onSave clicked ');
-            console.log($scope.editData);
-
-           $scope.editData.meta = $scope.flow;
-           $scope.$apply();
-           console.log($scope.flow);
+            dataService.instance.client.set($scope.flow._meta.path, angular.copy($scope.flow), {merge:true}, function(e, response){
+                console.log(e);
+                if (e) $scope.notify('saving flow failed', 'danger');
+            });
         };
 
         var onDelete = function (args) {
-            console.log('onDelete clicked ');
-            console.log($scope.editData);
 
         };
 
@@ -289,7 +200,20 @@ ideControllers.controller('flow_edit', ['$scope',
 
         $scope.actions = actions;
         $scope.$emit('editor_loaded', actions);
-        console.log('flow_edit controller loaded');
+
+        dataService.instance.client.off($scope.flow._meta.path, function(e){
+        if (e) return $scope.notify('unable to unattach to system events', 'danger');
+
+        dataService.instance.client.on($scope.flow._meta.path, function(data, _meta){
+
+            $scope.notify('flow updated', 'info');
+
+         }, function(e){
+
+            if (e) return $scope.notify('unable to attach to system events', 'danger');
+
+         });
+    });
 
     }
 ]);

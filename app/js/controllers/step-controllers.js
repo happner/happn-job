@@ -1,16 +1,7 @@
 ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', 'args', 'dataService', function($scope, $modalInstance, data, args, dataService) {
 
 	console.log('step edit:::', args);
-
-	$scope.data = data;
-	$scope.message = {type:'alert-warning', message:'', display:'none'};
-	$scope.step = {name:'', description:'', project:'', src:'', type: 'shape', editable:true};
-
-	var showMessage = function(type, message){
-		  $scope.message.type = type;
-		  $scope.message.message = message;
-		  $scope.message.display = 'block';
-	};
+	$scope.step = {type: 'Step'};
 
 	function validate(){
 	  	return true;
@@ -18,17 +9,9 @@ ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', 'arg
 
 	$scope.ok = function () {
 
-		console.log('$scope.data');
-		console.log($scope.data);
-
-		console.log('$scope.step');
-		console.log($scope.step);
-
-		okToSave = true;
-
 		if (validate())
 		{
-			$modalInstance.close('New shape added OK');
+			$modalInstance.close({settings:$scope.step, id:args.id});
 		}
 
 	};
@@ -37,21 +20,10 @@ ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', 'arg
 	    $modalInstance.dismiss('cancel');
 	};
 
-	dataService.traverse(data, args.path, function(e, shape){
-		if (!e){
-			console.log('shape:::', shape);
-			dataService.traverse(data, '/Projects/' + shape.meta.project + '/Controls/' + shape.meta.control, function(e, control){
-				if (!e){
-					console.log('control:::', control);
-					dataService.traverse(data, '/Projects/' + shape.meta.project + '/Operations/' + shape.meta.operation, function(e, operation){
-						if (!e){
-							console.log('operation:::', operation);
-							$scope.html = base64.decode(control.meta.currentCode);
-						}
-					})
-				}
-			})
-		}
-	})
+	dataService.instance.client.get(args.control, function(e, control){
+		console.log('got control:::', control);
+		$scope.html = base64.decode(control.currentCode);
+		$scope.$apply();
+	});
 
 }]);

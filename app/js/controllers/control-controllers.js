@@ -11,16 +11,16 @@ ideControllers.controller('control_new', ['$scope', '$modalInstance', 'dataServi
 
 	$scope.ok = function(){
 
-		if (!$scope.control.name) return $scope.notify('your control needs a name', 'warning');
-		if (!$scope.control.project) return $scope.notify('your control needs a project', 'warning');
+		if (!$scope.control.name) return $scope.notify('your control needs a name', 'warning', 0, true);
+		if (!$scope.control.project) return $scope.notify('your control needs a project', 'warning', 0, true);
 
 		dataService.instance.client.get($scope.control.project + '/Control/*', {criteria:{name:$scope.control.name}}, function(e, controls){
 
-			if (controls.length > 0) return $scope.notify('a control with this name already exists', 'warning');
+			if (controls.length > 0) return $scope.notify('a control with this name already exists', 'warning', 0, true);
 
 			dataService.instance.client.setSibling($scope.control.project + '/Control', $scope.control, function(e, newControl){
 
-	  			if (e) return $scope.notify('error saving control: ' + e.toString(), 'danger');
+	  			if (e) return $scope.notify('error saving control: ' + e.toString(), 'danger', 0, true);
 
 	  			$modalInstance.close(newControl);
 
@@ -28,141 +28,103 @@ ideControllers.controller('control_new', ['$scope', '$modalInstance', 'dataServi
 
 		});
 
-		$modalInstance.close($scope.control);
 	}
 
-	 //  $scope.data = data;
-	 //  $scope.message = {type:'alert-warning', message:'', display:'none'};
-	 //  $scope.control = {name:'', description:'', project:'', src:'', type: 'control', editable:true};
-
-
-	 //  $scope.ok = function () {
-
-		// console.log('$scope.data');
-		// console.log($scope.data);
-
-		// console.log('$scope.control');
-		// console.log($scope.control);
-
-		// var controlObj = {meta: $scope.control};
-		// var okToSave = false;
-
-		// if ($scope.data.Projects[$scope.control.project]['Controls'] == null)
-		// {
-		// 	$scope.data.Projects[$scope.control.project]['Controls'] = {};
-		// 	okToSave = true;
-		// }
-		// else
-		// {
-		// 	if ($scope.data.Projects[$scope.control.project]['Controls'][$scope.control.name] != null)
-		// 		showMessage('alert-warning', 'A control by this name already exists');
-		// 	else
-		// 	{
-		// 		okToSave = true;
-		// 	}
-		// }
-
-		// if (okToSave)
-		// {
-		// 	$scope.data.Projects[$scope.control.project]['Controls'][$scope.control.name] = controlObj;
-		// 	$modalInstance.close('New project added OK');
-		// }
-
-	 //  };
-
-	 //  $scope.cancel = function () {
-	 //    $modalInstance.dismiss('cancel');
-	 //  };
-
 }]);
 
-ideControllers.controller('control_edit', ['$scope', 'dataService', 'AppSession', function($scope, dataService, AppSession) {
+ideControllers.controller('control_edit', ['$scope', 'dataService', 'AppSession', '$rootScope', function($scope, dataService, AppSession, $rootScope) {
 
-	 if ($scope.editData.meta.currentCode == null)
-		 $scope.editData.meta.currentCode = AppSession.defaultControlCode;
+	if ($scope.control.currentCode == null)
+		$scope.control.currentCode = AppSession.defaultControlCode;
 
-	 $scope.editorCode = base64.decode($scope.editData.meta.currentCode);
+	$scope.editorCode = base64.decode($scope.control.currentCode);
 
-	 console.log('Loaded new control_edit!!!');
+ 	var onSave = function(args){
+		 $scope.control.currentCode = base64.encode($scope.editorCode);
+		 dataService.instance.client.set($scope.control._meta.path, $scope.control, {merge:true}, function(e, response){
+		 	if (e) $scope.notify('saving control failed', 'danger');
+		 });
+	};
 
-	 var test = 'blah';
-
-	 var onSave = function(args){
-		 console.log('onSave clicked ');
-		 console.log($scope.editData);
-
-		 $scope.editData.meta.currentCode = base64.encode($scope.editorCode);
-	 };
-
-	 var onPreview = function(args){
-		 console.log('onPreview clicked ');
-
+	var onPreview = function(args){
 		 $scope.openModal('../templates/control_view.html', 'control_view', null, {view_html:$scope.to_trusted($scope.editorCode)});
-	 };
+	};
 
-	 var actions = [
-	    {
-	    	text:'preview',
-	    	handler:onPreview,
-	    	cssClass:'glyphicon glyphicon-eye-open'
-	    },
-		{
-			text:'undo',
-			handler:onSave,
-	 		cssClass:'glyphicon glyphicon-arrow-left'
-		},
-		{
-			text:'redo',
-			handler:onSave,
-	 		cssClass:'glyphicon glyphicon-arrow-right'
-		},
-		{
-			text:'save',
-			handler:onSave,
-	 		cssClass:'glyphicon glyphicon-floppy-disk'
-		},
-		{
-			text:'tag',
-			handler:onSave,
-	 		cssClass:'glyphicon glyphicon-tag'
-		},
-		{
-			text:'history',
-			handler:onSave,
-	 		cssClass:'glyphicon glyphicon-time'
-		},
-		{
-			text:'delete',
-			handler:onSave,
-	 		cssClass:'glyphicon glyphicon-remove'
-		}];
+	var actions = [
+    {
+    	text:'preview',
+    	handler:onPreview,
+    	cssClass:'glyphicon glyphicon-eye-open'
+    },
+	{
+		text:'undo',
+		handler:onSave,
+ 		cssClass:'glyphicon glyphicon-arrow-left'
+	},
+	{
+		text:'redo',
+		handler:onSave,
+ 		cssClass:'glyphicon glyphicon-arrow-right'
+	},
+	{
+		text:'save',
+		handler:onSave,
+ 		cssClass:'glyphicon glyphicon-floppy-disk'
+	},
+	{
+		text:'tag',
+		handler:onSave,
+ 		cssClass:'glyphicon glyphicon-tag'
+	},
+	{
+		text:'history',
+		handler:onSave,
+ 		cssClass:'glyphicon glyphicon-time'
+	},
+	{
+		text:'delete',
+		handler:onSave,
+ 		cssClass:'glyphicon glyphicon-remove'
+	}];
 
-	 $scope.actions = actions;
-	 $scope.$emit('editor_loaded', actions);
-	 console.log('control_edit controller loaded');
+	$scope.actions = actions;
+	$scope.$emit('editor_loaded', actions);
 
-	 $scope.aceLoaded = function(){
+	$scope.aceLoaded = function(){
 
-	 };
+	};
 
-	 $scope.aceChanged = function(){
+	$scope.aceChanged = function(){
 
-	 };
+	};
+
+	dataService.instance.client.off($scope.control._meta.path, function(e){
+		if (e) return $scope.notify('unable to unattach to system events', 'danger');
+
+		dataService.instance.client.on($scope.control._meta.path, function(data, _meta){
+
+		 	$scope.notify('control updated', 'info');
+		 	$scope.editorCode = base64.decode(data.currentCode);
+
+		 }, function(e){
+
+		 	if (e) return $scope.notify('unable to attach to system events', 'danger');
+
+		 });
+	});
 
 }]);
 
-ideControllers.controller('control_view', ['$scope', '$modalInstance','$rootScope', 'dataService', 'AppSession', 'args', 'ideHelper', function($scope, $modalInstance, $rootScope, dataService, AppSession, args, ideHelper) {
-	dataService.setToScope($scope, 'data');
+ideControllers.controller('control_view', ['$scope', '$modalInstance','$rootScope', 'dataService', 'AppSession', 'args', function($scope, $modalInstance, $rootScope, dataService, AppSession, args) {
+
 	$scope.view_html = args.view_html;
 	$scope.params = {Param1:'Test',Param2:'Test'};
-	$scope.helper = ideHelper;
 
 	$scope.ok = function(){
 		if (args.okHandler != null)
 			args.okHandler($modalInstance);
 		else
 		{
-
 			$modalInstance.close('Control viewed OK');
 			console.log($scope.params);
 		}

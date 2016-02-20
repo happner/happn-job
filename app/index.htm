@@ -27,9 +27,9 @@
 	<script src="js/app.js"></script>
 	<script src="js/controllers/system-controllers.js"></script>
 	<script src="js/controllers/project-controllers.js"></script>
-	<script src="js/controllers/operation-controllers.js"></script>
+	<script src="js/controllers/directive-controllers.js"></script>
 	<script src="js/controllers/control-controllers.js"></script>
-	<script src="js/controllers/shape-controllers.js"></script>
+	<script src="js/controllers/droid-controllers.js"></script>
 	<script src="js/controllers/flow-controllers.js"></script>
 	<script src="js/controllers/step-controllers.js"></script>
     <script src="js/filters/system-filters.js"></script>
@@ -48,12 +48,12 @@
 		   <span class="dropdown actions-span">
 			  <i href="#" class="dropdown-toggle glyphicon glyphicon-plus" data-toggle="dropdown"></i>
 				 <ul class="dropdown-menu" >
+				  <li><a style="cursor:pointer" ng-click="openNewModal('blueprint', 'new')">Blueprint</a></li>
 		          <li><a style="cursor:pointer" ng-click="openNewModal('project', 'new')">Project</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('operation', 'new')">Operation</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('directive', 'new')">Directive</a></li>
 		          <li><a style="cursor:pointer" ng-click="openNewModal('control', 'new')">Control</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('shape', 'new')">Shape</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('feed', 'new')">Feed</a></li>
-		          <li><a style="cursor:pointer" ng-click="openNewModal('flow', 'new')">Flow</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('droid', 'new')">Droid</a></li>
+		          <li><a style="cursor:pointer" ng-click="openNewModal('flow', 'new')">Assembly Line</a></li>
 		        </ul>
 			</span>
 		</div>
@@ -61,7 +61,7 @@
    	  <abn-tree tree-data="ux_treedata" meta-data="meta" icon-expand="fa fa-plus-square" icon-collapse="fa fa-minus-square" icon-leaf="" on-select="my_tree_handler(branch)" on-expand-or-contract="on_expand_or_contract(branch)" expand-level="3"></abn-tree>
 	  </div>
 	  <div class="col-md-9 content" ng-controller="ContentController">
-	  	<div style="display:{{data.message.display}};position:absolute;bottom:5px;right:5px" class="alert {{data.message.type}}">{{data.message.message}}</div>
+	  	<div ng-include src="'../templates/notify.html'"></div>
 	 	<span class="content-actions" style="display:{{actions_display}};position:absolute;z-index:9999999999;top:0px;right:0px" id="span_content_actions">
 	 		<i ng-repeat="action in actions" ng-click="action_selected(action)" class="content-action {{action.cssClass}}"></i>
 	 	</span>

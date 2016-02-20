@@ -4,6 +4,9 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 	$rootScope.data = {
 		cache:{
+			'Blueprints':{
+
+			},
 			'Projects':{
 
 			},
@@ -15,6 +18,11 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 			}
 		},
 		message:{
+			message:'',
+			display:'none',
+			type:'alert-info'
+		},
+		messagemodular:{
 			message:'',
 			display:'none',
 			type:'alert-info'
@@ -33,14 +41,14 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 		}
 
-
 	}
 
 	$rootScope.addProject = function(project){
 
-		project.Operations = {};
+		project.Directives = {};
 		project.Controls = {};
-		project.Shapes = {};
+		project.Droids = {};
+		project['Assembly Lines'] = {};
 
 		return $rootScope.data.cache.Projects[project.name] = project;
 	}
@@ -101,34 +109,60 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 		cacheLocation[item.name] = {_meta:item._meta, name:item.name, description:item.description, type:type};
 	}
 
-	$rootScope.notify = function(message, type, hide){
+	$rootScope.notify = function(message, type, hide, modular){
 
 		if (!type) type = 'info';
 		if (hide) hide = 0;
 
-		$rootScope.data.message.type = 'alert-' + type;
-		$rootScope.data.message.message = message;
-		$rootScope.data.message.display = 'inline-block';
+		var notifyType = 'message';
+
+		if (modular) notifyType = 'messagemodular'
+
+		$rootScope.data[notifyType].type = 'alert-' + type;
+		$rootScope.data[notifyType].message = message;
+		$rootScope.data[notifyType].display = 'inline-block';
 
 		$rootScope.$apply();
 
+		console.log('notified', message, type);
+
 		if (hide) setTimeout(function(){
-			$rootScope.data.message.display = 'none';
+			$rootScope.data[notifyType].display = 'none';
 		}, hide);
+	}
+
+	var dataBindConfig = function(scope, config){
+		scope.config = config;
+		scope.nomenclature = config.nomenclatures[config.nomenclature];
+		scope.$apply();
 	}
 
 	dataService.init('127.0.0.1', 3000, '_ADMIN', 'happn', function(e){
 
 		if (e) throw e;
 
-		dataService.instance.client.get('/PROJECTS/Project/*', {"criteria":{"type":"Project"}}, function(e, projects){
+		dataService.instance.client.get('/SYSTEM/CONFIG', function(e, config){
 
-			projects.map(function(project){
-				//cacheLocation, type, item
-				$rootScope.addProject(project);
-			});
+			if (e) throw e;
 
-			$rootScope.$apply();
+			dataBindConfig($rootScope,config);
+
+			dataService.instance.client.on('/SYSTEM/CONFIG', function(data){
+				dataBindConfig($rootScope,data);
+			}, function(e){
+				dataService.instance.client.get('/PROJECTS/Project/*', {"criteria":{"type":"Project"}}, function(e, projects){
+
+					projects.map(function(project){
+						//cacheLocation, type, item
+						$rootScope.addProject(project);
+					});
+
+					$rootScope.$apply();
+
+				});
+			})
+
+
 
 		});
 
@@ -159,6 +193,9 @@ ideControllers.controller('ContentController', ['$scope', '$rootScope', '$modal'
 	 		$scope[item.type.toLowerCase()] = data;
 
 	 		$rootScope.data.templatePath = '../templates/' + item.type.toLowerCase() + '_edit.html';
+
+	 		console.log('opening control of type:::', item);
+
 			$rootScope.$apply();
 
 	 	});
@@ -188,7 +225,7 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 
   	function contractBranch(branch, done){
 
-  		if (eventHandlers[branch._meta.path] >= 0){
+  		if (branch._meta && eventHandlers[branch._meta.path] >= 0){
 
   			dataService.instance.client.off(eventHandlers[branch._meta.path], function(e){
 
@@ -218,7 +255,11 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
   			dataService.instance.client.get(branch._meta.path + '/*', function(e, items){
   				console.log('have proj items:::', items);
   				items.map(function(item){
-  					$rootScope.data.cache.Projects[branch.name][item.type + 's'][item.name] = item;
+
+  					if ($rootScope.nomenclature[item.type]){
+  						$rootScope.data.cache.Projects[branch.name][$rootScope.nomenclature[item.type] + 's'][item.name] = item;
+  					}else
+						$rootScope.data.cache.Projects[branch.name][item.type + 's'][item.name] = item;
   				});
 
   				$rootScope.$apply();

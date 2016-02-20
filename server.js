@@ -1,4 +1,6 @@
 var service = require('happn').service;
+var client = require('happn').client;
+
 var serveStatic = require('serve-static');
 
 var PORT = 3000;
@@ -47,8 +49,37 @@ service.create({
 
     	if (e) throw e;
 
-  		serviceInstance.connect.use(serveStatic(__dirname + '/app'));
-  		console.log('service up and listening on port ' + PORT);
+      client.create({
+        config:{
+          username:'_ADMIN',
+          password:'happn',
+          port:3000
+        }
+      })
+
+      .then(function(clientInstance){
+
+        clientInstance.set('/SYSTEM/CONFIG', {
+          nomenclatures:{
+            'Assembly Line':{
+              'Flow':'Assembly Line'
+            }
+          },
+          nomenclature:'Assembly Line'
+        },function(e){
+          if (e) throw e;
+          serviceInstance.connect.use(serveStatic(__dirname + '/app'));
+          console.log('service up and listening on port ' + PORT);
+        })
+
+
+      })
+
+      .catch(function(e){
+        throw e;
+      });
+
+
 
 	}
 );

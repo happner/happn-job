@@ -34,9 +34,6 @@ ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataServi
 ideControllers.controller('project_edit', ['$scope', 'dataService', function($scope, dataService) {
 
 	var onSave = function(args){
-		 console.log('onSave clicked ');
-		 console.log($scope.editData);
-
 		 $scope.editData.meta = $scope.project;
 	};
 
