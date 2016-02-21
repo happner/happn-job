@@ -15,7 +15,7 @@ box-shadow: 2px 2px 19px #aaa;
    -webkit-box-shadow: 2px 2px 19px #aaa;
    -moz-box-shadow: 2px 2px 19px #aaa;
 -moz-border-radius:0.5em;
-border-radius:50%;
+border-radius:10px;
 opacity:0.8;
 filter:alpha(opacity=80);
 width:100px;

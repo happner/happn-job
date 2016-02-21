@@ -27,7 +27,11 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 			display:'none',
 			type:'alert-info'
 		},
-		templatePath:''
+		templatePath:'',
+		session:{
+			status:'disconnected',
+			user:''
+		}
 	}
 
 	$rootScope.updateData = function(item){
@@ -49,6 +53,7 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 		project.Controls = {};
 		project.Droids = {};
 		project['Assembly Lines'] = {};
+		project['Floor Plans'] = {};
 
 		return $rootScope.data.cache.Projects[project.name] = project;
 	}
@@ -112,7 +117,7 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 	$rootScope.notify = function(message, type, hide, modular){
 
 		if (!type) type = 'info';
-		if (hide) hide = 0;
+		if (!hide) hide = 0;
 
 		var notifyType = 'message';
 
@@ -124,10 +129,9 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 		$rootScope.$apply();
 
-		console.log('notified', message, type);
-
 		if (hide) setTimeout(function(){
 			$rootScope.data[notifyType].display = 'none';
+			$rootScope.$apply();
 		}, hide);
 	}
 
@@ -157,7 +161,27 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 						$rootScope.addProject(project);
 					});
 
+					$rootScope.data.session.status = 'connected';
+					$rootScope.data.session.user = '_ADMIN';
+
+					dataService.instance.client.onEvent('reconnect-scheduled', function(data){
+						$rootScope.data.session.status = 'reconnecting';
+						$rootScope.$apply();
+					});
+
+					dataService.instance.client.onEvent('reconnect-successful', function(data){
+						$rootScope.data.session.status = 'connected';
+						$rootScope.$apply();
+					});
+
+					dataService.instance.client.onEvent('connection-ended', function(data){
+						$rootScope.data.session.status = 'connection terminated';
+						$rootScope.$apply();
+					});
+
 					$rootScope.$apply();
+
+
 
 				});
 			})

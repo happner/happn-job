@@ -6,6 +6,12 @@ body {
   padding-right:10px;
 }
 
+.drawing {
+  background: no-repeat center center;
+  background-size: cover;
+  /*background-color: rgba(0, 0, 0, 0.6);*/
+}
+
 .active {
 	font-weight:bold;
 	background-color:#CCC;

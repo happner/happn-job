@@ -54,6 +54,19 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
             });
         }
 
+        $scope.getShapeById = function(shapeId){
+
+            console.log('getting shape by id:::', shapeId);
+
+            for (var shapeIndex in $scope.flow.drawing.shapes){
+                var shape = $scope.flow.drawing.shapes[shapeIndex];
+                console.log('looking at shape by id:::', shape);
+                if (shape.id == shapeId)
+                    return shape;
+            }
+            return null;
+        }
+
         $scope.addShape = function(shape, x, y){
 
             console.log('adding shape:::', shape);
@@ -120,10 +133,21 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
 
                 return $scope.openModal('../templates/step_edit.html', 'step_edit', handler, params);
             }
+
+            if (event == "shapeMoved"){
+                var movedShape = params[0][0];
+                var coordinates = params[1];
+                console.log("shapeMoved:::", movedShape.id, coordinates);
+                var shape = $scope.getShapeById(movedShape.id.replace('flowchart',''));
+                shape.position = coordinates;
+
+                console.log('coordinates ok:::');
+            }
         }
 
         $scope.shapeEdit = function(shape) {
             console.log('shape edit called');
+
         }
 
         if ($scope.flow.drawing == null) {
@@ -178,10 +202,10 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
         };
 
         var onToggleProperties = function (args) {
-            if (!$scope.collapsed)
-            	$scope.collapsed = false;
-            else
-            	$scope.collapsed = true;
+
+            $scope.collapsed = !$scope.collapsed;
+
+            $scope.$apply();
         };
 
         var actions = [{
@@ -202,18 +226,18 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
         $scope.$emit('editor_loaded', actions);
 
         dataService.instance.client.off($scope.flow._meta.path, function(e){
-        if (e) return $scope.notify('unable to unattach to system events', 'danger');
+            if (e) return $scope.notify('unable to unattach to system events', 'danger');
 
-        dataService.instance.client.on($scope.flow._meta.path, function(data, _meta){
+            dataService.instance.client.on($scope.flow._meta.path, function(data, _meta){
 
-            $scope.notify('flow updated', 'info');
+                $scope.notify('flow updated', 'info', 5000);
 
-         }, function(e){
+             }, function(e){
 
-            if (e) return $scope.notify('unable to attach to system events', 'danger');
+                if (e) return $scope.notify('unable to attach to system events', 'danger');
 
-         });
-    });
+             });
+        });
 
     }
 ]);

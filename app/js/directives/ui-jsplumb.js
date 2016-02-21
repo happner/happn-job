@@ -17,17 +17,11 @@ angular.module('ui.jsPlumb', [])
     	  drawingEvent: '=',
     	  drawingMethod:'='
       },
-      /*
-      template: '<div class="demo flowchart-demo" id="{{drawingData.id}}">' +
-    	     		'<div ng-repeat="shape in drawingData.shapes" class="{{drawingData.shapeClass + shape.cssClass}}" style="{{shape.style + shape.position}}" id="{{\'flowchart\' + shape.id}}"><br/><strong>{{shape.label}}</strong><span class="action-container"><i class="action glyphicon glyphicon-remove"></i><i onclick="alert(\'edit clicked\')" class="action glyphicon glyphicon-pencil"></i></span></div>' +
-    	     	'</div> ',*/
    	  template: '<div class="demo flowchart-demo" id="{{drawingData.id}}">' +
     	     		'<div ng-repeat="shape in drawingData.shapes" class="{{drawingData.shapeClass + shape.cssClass}}" style="{{shape.style + shape.position}}" id="{{\'flowchart\' + shape.id}}"><br/><strong>{{shape.label}}</strong><span class="action-container"><i class="action glyphicon glyphicon-remove"></i><i ng-click="drawingEvent(\'shape-clicked\', shape)" class="action glyphicon glyphicon-pencil"></i></span></div>' +
     	     	'</div> ',
       link: function (scope, elm, attrs) {
         var options, opts, instance;
-
-        console.log('linking flowchart!!!');
 
         //added toEm function courtesy of Scott Jehl (scott@filamentgroup.com)
         $.fn.toEm = function(settings){
@@ -77,22 +71,18 @@ angular.module('ui.jsPlumb', [])
 		});
 
 		instance.bind("connectionDrag", function(connection) {
-			console.log("connection " + connection.id + " is being dragged. suspendedElement is ", connection.suspendedElement, " of type ", connection.suspendedElementType);
-
 			scope.drawingEvent("connectionDrag", [connection]);
 		});
 
 		instance.bind("connectionDragStop", function(connection) {
-			console.log("connection " + connection.id + " was dragged");
-
 			scope.drawingEvent("connectionDragStop", [connection]);
 		});
 
 		instance.bind("connectionMoved", function(params) {
-			console.log("connection " + params.connection.id + " was moved");
-
 			scope.drawingEvent("connectionMoved", [params]);
 		});
+
+
 
 		scope.drawingEvent("instanceCreated", [instance]);
 
@@ -181,16 +171,21 @@ angular.module('ui.jsPlumb', [])
 		initShape = function(shapeElement) {
 			shapeElement.draggable(
 			{
+				containment:$('.flowchart-container'),
+				grid:[50,50],
 				stop: function( event, ui ) {
-					 var offset = $(this).offset();
-					    var xPos = offset.left;
-					    var yPos = offset.top;
-					    var position = 'top:' + $(yPos).toEm() + ';left:' + $(xPos).toEm();
 
-					    scope.drawingEvent("shapeMoved", [$(this), position]);
+					console.log('drag stopped:::', event, ui);
+
+					 var offset = $(this).offset();
+					 var xPos = offset.left;
+					 var yPos = offset.top;
+					 var position = 'top:' + ui.position.top + ';left:' + ui.position.left;
+
+					 scope.drawingEvent("shapeMoved", [$(this), position]);
 				},
 			    drag: function(){
-				    instance.repaint($(this)); // (or) jsPlumb.repaintEverything(); to repaint the connections and endpoints
+				    instance.repaintEverything(); // (or) jsPlumb.repaintEverything(); to repaint the connections and endpoints
 			    }
 			});
 		};
@@ -217,10 +212,7 @@ angular.module('ui.jsPlumb', [])
 			};
 
 		var addShape = function(shape){
-			console.log('addShape');
-			console.log(shape);
 			var newShapeElement = $('#flowchart' + shape.id);
-			console.log(newShapeElement);
 			_addEndpoints(shape.id, shape.sourceEndPoints, shape.targetEndPoints, shape.dragdropEndPoints);
 			initShape(newShapeElement);
 		}
@@ -241,16 +233,11 @@ angular.module('ui.jsPlumb', [])
 
 			        var shapes = $(document.getElementById(scope.drawingData.id)).find('.' + scope.drawingData.shapeClass);
 
-			        console.log('found shapes');
-			        console.log(shapes);
-
 			        //we check if the drawing hasn't been loaded yet, and we have the right amount of shapes in the html (ng-repeat is done)
 			        if (shapes != null && shapes.length == scope.drawingData.shapes.length && !loadedComplete)
 			        {
 			        	 // suspend drawing and initialise.
 			        	instance.doWhileSuspended(function() {
-
-			        		console.log('doing while suspended');
 
 							//connect all the shapes
 							scope.drawingData.shapes.map(function(currentShape, arrInex, arr){
@@ -264,8 +251,6 @@ angular.module('ui.jsPlumb', [])
 
 							// link all connections to the current scopes shapes
 							scope.drawingData.connections.map(function(currentConnection, arrIndex, arr){
-								console.log('current connection');
-								console.log(currentConnection);
 								instance.connect(currentConnection);
 							});
 
@@ -275,6 +260,6 @@ angular.module('ui.jsPlumb', [])
 			        }
 
 			    }, true);
-      }
+      	}
     };
   }]);
