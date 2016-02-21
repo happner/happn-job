@@ -23,6 +23,8 @@
     "jquery": "~2.2.0",
     "jquery-ui": "~1.11.4",
     "bootstrap": "~3.3.6",
-    "ace-builds": "~1.2.3"
+    "ace-builds": "~1.2.3",
+    "angular-bootstrap": "~1.1.2",
+    "angular-touch": "~1.5.0"
   }
 }

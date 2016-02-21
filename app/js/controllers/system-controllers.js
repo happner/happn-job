@@ -1,6 +1,6 @@
 'use strict';
 
-ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce', 'dataService', '$rootScope', function($scope, $modal, $log, $sce, dataService, $rootScope) {
+ideControllers.controller('BaseController', ['$scope', '$uibModal', '$log', '$sce', 'dataService', '$rootScope', function($scope, $uibModal, $log, $sce, dataService, $rootScope) {
 
 	$rootScope.data = {
 		cache:{
@@ -60,7 +60,7 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 	$rootScope.openModal = function (templatePath, controller, handler, args) {
 
-		    var modalInstance = $modal.open({
+		    var modalInstance = $uibModal.open({
 		      templateUrl: templatePath,
 		      controller: controller,
 		      resolve: {
@@ -195,8 +195,8 @@ ideControllers.controller('BaseController', ['$scope', '$modal', '$log', '$sce',
 
 }]);
 
-ideControllers.controller('ContentController', ['$scope', '$rootScope', '$modal', '$log', 'dataService', '$templateCache',
-	function($scope, $rootScope, $modal, $log, dataService, $templateCache) {
+ideControllers.controller('ContentController', ['$scope', '$rootScope', '$uibModal', '$log', 'dataService', '$templateCache',
+	function($scope, $rootScope, $uibModal, $log, dataService, $templateCache) {
 
 	  $scope.action_selected = function(action){
 		  action.handler();
@@ -332,14 +332,14 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 }]);
 
 
-ideControllers.controller('ModalContentController', ['$scope', '$modal', '$log', 'dataService', function($scope, $modal, $log, dataService) {
+ideControllers.controller('ModalContentController', ['$scope', '$uibModal', '$log', 'dataService', function($scope, $uibModal, $log, dataService) {
 
 	  dataService.init(AppSession.firebaseURL);
 	  dataService.setToScope($scope, 'data');
 
 	  $scope.open = function (type, action) {
 
-	    var modalInstance = $modal.open({
+	    var modalInstance = $uibModal.open({
 	      templateUrl: '../templates/' + action + '.html',
 	      controller: action.toString(),
 	      resolve: {

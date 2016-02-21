@@ -1,4 +1,4 @@
-ideControllers.controller('directive_new', ['$scope', '$modalInstance', 'dataService', 'utils', function($scope, $modalInstance, dataService, utils) {
+ideControllers.controller('directive_new', ['$scope', '$uibModalInstance', 'dataService', 'utils', function($scope, $uibModalInstance, dataService, utils) {
 
 	  $scope.directive = {name:'', description:'', project:'', src:'', type: 'Directive'};
 	  $scope.utils = utils;
@@ -16,13 +16,13 @@ ideControllers.controller('directive_new', ['$scope', '$modalInstance', 'dataSer
 
 	  			if (e) return $scope.notify('error saving directive: ' + e.toString(), 'danger', 0, true);
 
-	  			$modalInstance.close(newDirective);
+	  			$uibModalInstance.close(newDirective);
 
 	  		});
 
 		});
 
-		$modalInstance.close($scope.directive);
+		$uibModalInstance.close($scope.directive);
 	}
 
 }]);

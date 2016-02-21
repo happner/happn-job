@@ -1,4 +1,4 @@
-ideControllers.controller('control_new', ['$scope', '$modalInstance', 'dataService', 'utils', function($scope, $modalInstance, dataService, utils) {
+ideControllers.controller('control_new', ['$scope', '$uibModalInstance', 'dataService', 'utils', function($scope, $uibModalInstance, dataService, utils) {
 
 	$scope.control = {
 		name:'',
@@ -22,7 +22,7 @@ ideControllers.controller('control_new', ['$scope', '$modalInstance', 'dataServi
 
 	  			if (e) return $scope.notify('error saving control: ' + e.toString(), 'danger', 0, true);
 
-	  			$modalInstance.close(newControl);
+	  			$uibModalInstance.close(newControl);
 
 	  		});
 
@@ -115,17 +115,17 @@ ideControllers.controller('control_edit', ['$scope', 'dataService', 'AppSession'
 
 }]);
 
-ideControllers.controller('control_view', ['$scope', '$modalInstance','$rootScope', 'dataService', 'AppSession', 'args', function($scope, $modalInstance, $rootScope, dataService, AppSession, args) {
+ideControllers.controller('control_view', ['$scope', '$uibModalInstance','$rootScope', 'dataService', 'AppSession', 'args', function($scope, $uibModalInstance, $rootScope, dataService, AppSession, args) {
 
 	$scope.view_html = args.view_html;
 	$scope.params = {Param1:'Test',Param2:'Test'};
 
 	$scope.ok = function(){
 		if (args.okHandler != null)
-			args.okHandler($modalInstance);
+			args.okHandler($uibModalInstance);
 		else
 		{
-			$modalInstance.close('Control viewed OK');
+			$uibModalInstance.close('Control viewed OK');
 			console.log($scope.params);
 		}
 
@@ -133,9 +133,9 @@ ideControllers.controller('control_view', ['$scope', '$modalInstance','$rootScop
 
 	$scope.cancel = function(){
 		if (args.cancelHandler != null)
-			args.cancelHandler($modalInstance);
+			args.cancelHandler($uibModalInstance);
 		else
-			$modalInstance.close('Control viewed OK');
+			$uibModalInstance.close('Control viewed OK');
 	};
 
 }]);

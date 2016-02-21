@@ -1,6 +1,6 @@
 
-ideControllers.controller('flow_new', ['$scope', '$modalInstance', 'dataService', 'utils',
-    function ($scope, $modalInstance, dataService, utils) {
+ideControllers.controller('flow_new', ['$scope', '$uibModalInstance', 'dataService', 'utils',
+    function ($scope, $uibModalInstance, dataService, utils) {
 
         $scope.utils = utils;
 
@@ -24,7 +24,7 @@ ideControllers.controller('flow_new', ['$scope', '$modalInstance', 'dataService'
 
                     if (e) return $scope.notify('error saving flow: ' + e.toString(), 'danger', 0, true);
 
-                    $modalInstance.close(newFlow);
+                    $uibModalInstance.close(newFlow);
 
                 });
 
@@ -33,7 +33,7 @@ ideControllers.controller('flow_new', ['$scope', '$modalInstance', 'dataService'
         }
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
 
     }

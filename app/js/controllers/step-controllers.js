@@ -1,4 +1,4 @@
-ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', 'args', 'dataService', function($scope, $modalInstance, data, args, dataService) {
+ideControllers.controller('step_edit', ['$scope', '$uibModalInstance', 'data', 'args', 'dataService', function($scope, $uibModalInstance, data, args, dataService) {
 
 	console.log('step edit:::', args);
 	$scope.step = {type: 'Step'};
@@ -11,13 +11,13 @@ ideControllers.controller('step_edit', ['$scope', '$modalInstance', 'data', 'arg
 
 		if (validate())
 		{
-			$modalInstance.close({settings:$scope.step, id:args.id});
+			$uibModalInstance.close({settings:$scope.step, id:args.id});
 		}
 
 	};
 
 	$scope.cancel = function () {
-	    $modalInstance.dismiss('cancel');
+	    $uibModalInstance.dismiss('cancel');
 	};
 
 	dataService.instance.client.get(args.control, function(e, control){

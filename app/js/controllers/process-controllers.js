@@ -1,35 +1,35 @@
-ideControllers.controller('process_new', ['$scope', '$modalInstance', 'data', function($scope, $modalInstance, data) {
+ideControllers.controller('process_new', ['$scope', '$uibModalInstance', 'data', function($scope, $uibModalInstance, data) {
 
-	  $scope.data = data;  
+	  $scope.data = data;
 	  $scope.message = {type:'alert-warning', message:'', display:'none'};
-	  $scope.process = {name:'', description:'', project:'', src:'', type: 'process', editable:true}; 
-	  
+	  $scope.process = {name:'', description:'', project:'', src:'', type: 'process', editable:true};
+
 	  var showMessage = function(type, message){
 		  $scope.message.type = type;
 		  $scope.message.message = message;
 		  $scope.message.display = 'block';
 	  };
-	  
+
 	  var getProjectsArray = function(projects){
 		  var returnArray = [];
 		  for (var project in projects)
 			  returnArray.push(project);
 		  return returnArray;
 	  };
-	  
+
 	  $scope.getProjectsArray = getProjectsArray;
-	  
+
 	  $scope.ok = function () {
-		  
+
 		console.log('$scope.data');
 		console.log($scope.data);
-		
+
 		console.log('$scope.process');
 		console.log($scope.process);
-		
+
 		var processObj = {meta: $scope.process};
 		var okToSave = false;
-		
+
 		if ($scope.data.Projects[$scope.process.project]['Processes'] == null)
 		{
 			$scope.data.Projects[$scope.process.project]['Processes'] = {};
@@ -44,44 +44,44 @@ ideControllers.controller('process_new', ['$scope', '$modalInstance', 'data', fu
 				okToSave = true;
 			}
 		}
-		
+
 		if (okToSave)
 		{
 			$scope.data.Projects[$scope.process.project]['Processes'][$scope.process.name] = processObj;
-			$modalInstance.close('New process added OK');
+			$uibModalInstance.close('New process added OK');
 		}
-			
+
 	  };
 
 	  $scope.cancel = function () {
-	    $modalInstance.dismiss('cancel');
+	    $uibModalInstance.dismiss('cancel');
 	  };
-	  
+
 }]);
 
 ideControllers.controller('process_edit', ['$scope', 'dataService', 'AppSession', function($scope, dataService, AppSession) {
 
 	 console.log('$scope.editData');
 	 console.log($scope.editData);
-	 
+
 	 if ($scope.editData.meta.currentCode == null)
 		 $scope.editData.meta.currentCode = AppSession.defaultProcessCode;
 
 	 console.log($scope.editData);
 
 	 $scope.editorCode = base64.decode($scope.editData.meta.currentCode);
-	 
+
 	 console.log($scope.editorCode);
-	 
+
 	 var test = 'blah';
-	 
+
 	 var onSave = function(args){
 		 console.log('onSave clicked ');
 		 console.log($scope.editData);
-		 
+
 		 $scope.editData.meta.currentCode = base64.encode($scope.editorCode);
 	 };
-	
+
 	 var actions = [
 		{
 			text:'undo',
@@ -113,17 +113,17 @@ ideControllers.controller('process_edit', ['$scope', 'dataService', 'AppSession'
 			handler:onSave,
 	 		cssClass:'glyphicon glyphicon-remove'
 		}];
-	 
+
 	 $scope.actions = actions;
 	 $scope.$emit('editor_loaded', actions);
 	 console.log('process_edit controller loaded');
-	 
+
 	 $scope.aceLoaded = function(){
-		 
+
 	 };
-	 
+
 	 $scope.aceChanged = function(){
-		 
+
 	 };
-	 
+
 }]);

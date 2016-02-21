@@ -1,4 +1,4 @@
-ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataService', function($scope, $modalInstance, dataService) {
+ideControllers.controller('project_new', ['$scope', '$uibModalInstance', 'dataService', function($scope, $uibModalInstance, dataService) {
 
 	  $scope.message = {type:'alert-warning', message:'', display:'none'};
 	  $scope.project = {name:'', description:'', type:'Project'};
@@ -9,15 +9,15 @@ ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataServi
 
 	  		console.log(e, projects);
 
-	  		if (e) return $scope.notify('error validating save: ' + e.toString(), 'danger');
+	  		if (e) return $scope.notify('error validating save: ' + e.toString(), 'danger', 0, true);
 
-	  		if (projects.length > 0) return $scope.notify('A project by this name already exists', 'warning');
+	  		if (projects.length > 0) return $scope.notify('A project by this name already exists', 'warning', 0, true);
 
 	  		dataService.instance.client.setSibling('/PROJECTS/Project', $scope.project, function(e, newProject){
 
-	  			if (e) return $scope.notify('error saving project: ' + e.toString(), 'danger');
+	  			if (e) return $scope.notify('error saving project: ' + e.toString(), 'danger', 0, true);
 
-	  			$modalInstance.close(newProject);
+	  			$uibModalInstance.close(newProject);
 
 	  		});
 
@@ -26,7 +26,7 @@ ideControllers.controller('project_new', ['$scope', '$modalInstance', 'dataServi
 	  };
 
 	  $scope.cancel = function () {
-	    $modalInstance.dismiss('cancel');
+	    $uibModalInstance.dismiss('cancel');
 	  };
 
 }]);

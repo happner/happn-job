@@ -1,4 +1,4 @@
-ideControllers.controller('droid_new', ['$scope', '$modalInstance', 'dataService', 'utils', function($scope, $modalInstance, dataService, utils) {
+ideControllers.controller('droid_new', ['$scope', '$uibModalInstance', 'dataService', 'utils', function($scope, $uibModalInstance, dataService, utils) {
 
 	$scope.utils = utils;
 
@@ -47,7 +47,7 @@ ideControllers.controller('droid_new', ['$scope', '$modalInstance', 'dataService
 
 	  			if (e) return $scope.notify('error saving droid: ' + e.toString(), 'danger', 0, true);
 
-	  			$modalInstance.close(newDroid);
+	  			$uibModalInstance.close(newDroid);
 
 	  		});
 
@@ -56,7 +56,7 @@ ideControllers.controller('droid_new', ['$scope', '$modalInstance', 'dataService
 	  };
 
 	  $scope.cancel = function () {
-	    $modalInstance.dismiss('cancel');
+	    $uibModalInstance.dismiss('cancel');
 	  };
 
 }]);
