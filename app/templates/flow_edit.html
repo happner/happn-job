@@ -28,7 +28,7 @@
         </div>
       </div>
      </form>
-      <div style="border:1px solid #CCC;background-image:url('{{flow.floorplan}}')" class="flowchart-container drawing" ui-on-Drop="onDrop($event, $data, men)" id="{{flow.id}}">
+      <div style="border:1px solid #CCC;background-image:url('{{flow.floorplan}}')" class="flowchart-container drawing" ui-on-Drop="onDrop($event, $data, men)">
         <js-plumb drawing-data="flow.drawing" drawing-event="drawingEvent" drawing-method="drawingMethod" on-edit="shapeEdit" ></js-plumb>
       </div>
   </div>

@@ -82,7 +82,7 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
                 droid:shape._meta.path,
                 path:shape.path,
                 id: shapeId.replace(/ /g, ''),
-                label: shape.name + $scope.shapeCounters[shape.name],
+                label: shape.name + ' ' + $scope.shapeCounters[shape.name],
                 icon: '',
                 sourceEndPoints: [],
                 targetEndPoints: [],
@@ -98,7 +98,8 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
 
 
         $scope.onDrop = function ($event, $data) {
-            $scope.addShape($data.branch, $event.layerX, $event.layerY);
+            if ($data.branch.type == 'Droid')
+                $scope.addShape($data.branch, $event.layerX, $event.layerY);
         };
 
         $scope.drawingEvent = function (event, params) {

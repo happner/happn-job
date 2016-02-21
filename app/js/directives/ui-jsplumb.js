@@ -22,19 +22,6 @@ angular.module('ui.jsPlumb', [])
     	     	'</div> ',
       link: function (scope, elm, attrs) {
         var options, opts, instance;
-
-        //added toEm function courtesy of Scott Jehl (scott@filamentgroup.com)
-        $.fn.toEm = function(settings){
-        	settings = jQuery.extend({
-        		scope: 'body'
-        	}, settings);
-        	var that = parseInt(this[0],10),
-        		scopeTest = jQuery('<div style="display: none; font-size: 1em; margin: 0; padding:0; height: auto; line-height: 1; border:0;">&nbsp;</div>').appendTo(settings.scope),
-        		scopeVal = scopeTest.height();
-        	scopeTest.remove();
-        	return (that / scopeVal).toFixed(8) + 'em';
-        };
-
         options = scope.drawingData.config || {
         	// default drag options
 			DragOptions : { cursor: 'pointer', zIndex:2000 },
@@ -84,9 +71,11 @@ angular.module('ui.jsPlumb', [])
 			scope.drawingEvent("connectionMoved", [params]);
 		});
 
-
-
 		scope.drawingEvent("instanceCreated", [instance]);
+
+		scope.onDrop = function ($event, $data) {
+            console.log('on droppded:::');
+        };
 
      // this is the paint style for the connecting lines..
 		var connectorPaintStyle = scope.drawingData.connectorPaintStyle || {
@@ -177,8 +166,6 @@ angular.module('ui.jsPlumb', [])
 				grid:[50,50],
 				stop: function( event, ui ) {
 
-					console.log('drag stopped:::', event, ui);
-
 					 var offset = $(this).offset();
 					 var xPos = offset.left;
 					 var yPos = offset.top;
@@ -208,20 +195,22 @@ angular.module('ui.jsPlumb', [])
 				if (dragdropAnchors)
 				for (var k = 0; k < dragdropAnchors.length; k++) {
 					var targetUUID = toId + dragdropAnchors[k];
-					instance.addEndpoint("flowchart" + toId, dragdropEndpoint, { anchor:dragdropAnchors[k], uuid:targetUUID });
+					instance.addEndpoint("flowchart" + toId, dragdropEndpoint, { anchor:dragdropAnchors[k], uuid:targetUUID, source:"flowchart" + toId });
 				}
 
 			};
 
 		var addShape = function(shape){
-			var newShapeElement = $('#flowchart' + shape.id);
+			initShape($('#flowchart' + shape.id));
 			_addEndpoints(shape.id, shape.sourceEndPoints, shape.targetEndPoints, shape.dragdropEndPoints);
-			initShape(newShapeElement);
 		}
 
 		if (scope.drawingMethod){
 			scope.drawingMethod.newShape = function(shape){
-				addShape(shape);
+
+				scope.newShape = shape;
+
+				//addShape(shape);
 			}
 		}
 
@@ -256,9 +245,17 @@ angular.module('ui.jsPlumb', [])
 								instance.connect(currentConnection);
 							});
 
+							console.log('html changed done:::');
+
 						});
 
 				        loadedComplete = true;
+			        }else{
+			        	if (scope.newShape){
+			        		addShape(angular.copy(scope.newShape));
+			        		delete scope.newShape;
+			        	}
+
 			        }
 
 			    }, true);
