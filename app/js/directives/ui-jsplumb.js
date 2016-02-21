@@ -53,6 +53,8 @@ angular.module('ui.jsPlumb', [])
         opts = angular.extend({}, options, scope.$eval(attrs.jsPlumb), {Container:scope.drawingData.id});
         instance = jsPlumb.getInstance(opts);
 
+        instance.setContainer($("#" + scope.drawingData.id));
+
     	//
 		// listen for clicks on connections, and offer to delete connections on click.
 		//

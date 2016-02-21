@@ -20,10 +20,19 @@ ideControllers.controller('step_edit', ['$scope', '$uibModalInstance', 'data', '
 	    $uibModalInstance.dismiss('cancel');
 	};
 
-	dataService.instance.client.get(args.control, function(e, control){
-		console.log('got control:::', control);
-		$scope.html = base64.decode(control.currentCode);
-		$scope.$apply();
+	console.log('our control:::', args);
+
+	dataService.instance.client.get(args.droid, function(e, droid){
+		console.log('got droid:::', droid);
+
+		dataService.instance.client.get(droid.control, function(e, control){
+			console.log('got control:::', control);
+			var html = base64.decode(control.currentCode);
+			console.log('got control html:::', html);
+			$scope.html = html;
+			$scope.$apply();
+		});
+
 	});
 
 }]);

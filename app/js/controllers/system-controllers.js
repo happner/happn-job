@@ -267,8 +267,24 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 
   		if (branch.type == 'Project'){
 
-  			dataService.instance.client.on(branch._meta.path + '/*', function(data){
-		  		console.log('something happened in the project:::', data);
+  			var addProjectItem = function(projectName, item){
+  				if ($rootScope.nomenclature[item.type]){
+					$rootScope.data.cache.Projects[projectName][$rootScope.nomenclature[item.type] + 's'][item.name] = item;
+				}else
+				$rootScope.data.cache.Projects[projectName][item.type + 's'][item.name] = item;
+  			}
+
+  			dataService.instance.client.on(branch._meta.path + '/*', function(data, meta){
+
+  				if (['Control','Droid','Flow','Directive','FloorPlan'].indexOf(data.type) > -1)
+  				{
+  					data._meta = meta;
+
+  					if (data.project == branch._meta.path){
+  						addProjectItem(branch.name, data);
+  						$rootScope.$apply();
+  					}
+  				}
 		  	},
 		  	function(e, eventId){
 		  		eventHandlers[branch._meta.path] = eventId;
@@ -277,13 +293,9 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
   			console.log('GETTING /PROJECTS/' + branch._meta.path + '/*:::');
 
   			dataService.instance.client.get(branch._meta.path + '/*', function(e, items){
-  				console.log('have proj items:::', items);
-  				items.map(function(item){
 
-  					if ($rootScope.nomenclature[item.type]){
-  						$rootScope.data.cache.Projects[branch.name][$rootScope.nomenclature[item.type] + 's'][item.name] = item;
-  					}else
-						$rootScope.data.cache.Projects[branch.name][item.type + 's'][item.name] = item;
+  				items.map(function(item){
+  					addProjectItem(branch.name, item);
   				});
 
   				$rootScope.$apply();

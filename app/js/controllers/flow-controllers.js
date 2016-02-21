@@ -79,9 +79,7 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
             var shapeId = shape.name + '_' + Date.now();
 
             var shape = {
-                control:shape.control,
-                project:shape.project,
-                directive:shape.directive,
+                droid:shape._meta.path,
                 path:shape.path,
                 id: shapeId.replace(/ /g, ''),
                 label: shape.name + $scope.shapeCounters[shape.name],
@@ -95,7 +93,6 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
             }
 
             $scope.flow.drawing.shapes.push(shape);
-            $scope.$apply();
             $scope.drawingMethod.newShape(shape);
         }
 
