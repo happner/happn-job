@@ -17,6 +17,12 @@
   "dependencies": {
     "font-awesome": "~4.5.0",
     "angular-uuid4": "~0.3.1",
-    "jsPlumb": "jsplumb#~2.0.7"
+    "jsPlumb": "jsplumb#~2.0.7",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "jquery": "~2.2.0",
+    "jquery-ui": "~1.11.4",
+    "bootstrap": "~3.3.6",
+    "ace-builds": "~1.2.3"
   }
 }
