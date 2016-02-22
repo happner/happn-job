@@ -194,8 +194,12 @@ angular.module('ui.jsPlumb', [])
 				}
 				if (dragdropAnchors)
 				for (var k = 0; k < dragdropAnchors.length; k++) {
-					var targetUUID = toId + dragdropAnchors[k];
-					instance.addEndpoint("flowchart" + toId, dragdropEndpoint, { anchor:dragdropAnchors[k], uuid:targetUUID, source:"flowchart" + toId });
+					// try{
+						var targetUUID = toId + dragdropAnchors[k];
+						instance.addEndpoint("flowchart" + toId, dragdropEndpoint, { anchor:dragdropAnchors[k], uuid:targetUUID, source:"flowchart" + toId });
+					// }catch(e){
+					// 	console.log('addEndpoint failed:::', e);
+					// }
 				}
 
 			};
@@ -207,10 +211,7 @@ angular.module('ui.jsPlumb', [])
 
 		if (scope.drawingMethod){
 			scope.drawingMethod.newShape = function(shape){
-
 				scope.newShape = shape;
-
-				//addShape(shape);
 			}
 		}
 
@@ -245,13 +246,11 @@ angular.module('ui.jsPlumb', [])
 								instance.connect(currentConnection);
 							});
 
-							console.log('html changed done:::');
-
 						});
 
 				        loadedComplete = true;
 			        }else{
-			        	if (scope.newShape){
+			        	if (newval != oldval && scope.newShape){
 			        		addShape(angular.copy(scope.newShape));
 			        		delete scope.newShape;
 			        	}

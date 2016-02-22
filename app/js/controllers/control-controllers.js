@@ -32,22 +32,54 @@ ideControllers.controller('control_new', ['$scope', '$uibModalInstance', 'dataSe
 
 }]);
 
-ideControllers.controller('control_edit', ['$scope', 'dataService', 'AppSession', '$rootScope', function($scope, dataService, AppSession, $rootScope) {
+ideControllers.controller('control_edit', ['$scope', 'dataService', 'AppSession', '$rootScope', 'hotkeys',
+	function($scope, dataService, AppSession, $rootScope, hotkeys) {
 
 	if ($scope.control.currentCode == null)
 		$scope.control.currentCode = AppSession.defaultControlCode;
 
 	$scope.editorCode = base64.decode($scope.control.currentCode);
 
- 	var onSave = function(args){
-		 $scope.control.currentCode = base64.encode($scope.editorCode);
-		 dataService.instance.client.set($scope.control._meta.path, $scope.control, {merge:true}, function(e, response){
+	function save(){
+		$scope.control.currentCode = base64.encode($scope.editorCode);
+		dataService.instance.client.set($scope.control._meta.path, $scope.control, {merge:true}, function(e, response){
 		 	if (e) $scope.notify('saving control failed', 'danger');
-		 });
+		});
+	}
+
+	function preview(){
+		 $scope.openModal('../templates/control_view.html', 'control_view', null, {view_html:$scope.to_trusted($scope.editorCode)});
+	}
+
+	hotkeys.bindTo($scope)
+    .add({
+      combo: '⌘+s',
+      description: 'save',
+      callback: function() {
+      	save();
+      }
+    })
+    .add({
+      combo: 'ctrl+s',
+      description: 'save',
+      callback: function() {
+      	save();
+      }
+    })
+    .add({
+      combo: 'ctrl+v',
+      description: 'preview',
+      callback: function() {
+      	preview();
+      }
+    })
+
+ 	var onSave = function(args){
+ 		save();
 	};
 
 	var onPreview = function(args){
-		 $scope.openModal('../templates/control_view.html', 'control_view', null, {view_html:$scope.to_trusted($scope.editorCode)});
+		preview();
 	};
 
 	var actions = [

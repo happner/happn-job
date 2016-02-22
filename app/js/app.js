@@ -13,7 +13,9 @@ var ideApp = angular.module('ideApp', [
   'ui.ace',
   'ui.jsPlumb',
   'ngDragDrop',
-  'happn'
+  'happn',
+  'ngLoadScript',
+  'cfp.hotkeys'
 ]);
 
 ideApp.directive('dynamic', function ($compile) {

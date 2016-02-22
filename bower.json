@@ -25,6 +25,7 @@
     "bootstrap": "~3.3.6",
     "ace-builds": "~1.2.3",
     "angular-bootstrap": "~1.1.2",
-    "angular-touch": "~1.5.0"
+    "angular-touch": "~1.5.0",
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.7.0"
   }
 }
