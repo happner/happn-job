@@ -54,6 +54,19 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
             });
         }
 
+        if (!$scope.flow.floorPlanOpacity)
+            $scope.flow.floorPlanOpacity = 10;
+
+        $scope.floorPlan = {
+            opacity:{
+                from:0,
+                to:10,
+                floor: true,
+                step:1,
+                vertical: false
+            }
+        }
+
         $scope.getShapeById = function(shapeId){
 
             console.log('getting shape by id:::', shapeId);

@@ -163,7 +163,7 @@ angular.module('ui.jsPlumb', [])
 			shapeElement.draggable(
 			{
 				containment:$('.flowchart-container'),
-				grid:[50,50],
+				grid:[10,10],
 				stop: function( event, ui ) {
 
 					 var offset = $(this).offset();

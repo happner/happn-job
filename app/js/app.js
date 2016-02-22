@@ -15,7 +15,8 @@ var ideApp = angular.module('ideApp', [
   'ngDragDrop',
   'happn',
   'ngLoadScript',
-  'cfp.hotkeys'
+  'cfp.hotkeys',
+  'angularAwesomeSlider'
 ]);
 
 ideApp.directive('dynamic', function ($compile) {
