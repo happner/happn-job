@@ -40,11 +40,22 @@ ideControllers.controller('BaseController', ['$scope', '$uibModal', '$log', '$sc
 		if (item.type == 'Project')
 			return $rootScope.addProject(item);
 
+		if (item.type == 'Blueprint')
+			return $rootScope.addBlueprint(item);
+
 		if (item.type == 'Control'){
 			//return $rootScope.addCachedItem($rootScope.data.cache.Projects, 'Project', item);
 
 		}
 
+	}
+
+	$rootScope.addBlueprint = function(blueprint){
+
+		blueprint.Templates = {};
+		blueprint.Generators = {};
+
+		return $rootScope.data.cache.Blueprints[blueprint.name] = blueprint;
 	}
 
 	$rootScope.addProject = function(project){
@@ -77,7 +88,7 @@ ideControllers.controller('BaseController', ['$scope', '$uibModal', '$log', '$sc
     	  modalInstance.result.then(handler.saved, handler.dismissed);
 	};
 
-	$rootScope.openNewModal = function (type, action) {
+	$rootScope.openNewModal = function (template, controller) {
 
 		 var handler = {
 				 saved:function(result){
@@ -88,8 +99,7 @@ ideControllers.controller('BaseController', ['$scope', '$uibModal', '$log', '$sc
 				 }
 		 };
 
-		 var controller = type + '_' + action;
-		 return $scope.openModal('../templates/' + controller + '.html', controller, handler);
+		 return $scope.openModal('../templates/' + template + '.html', controller, handler);
 	};
 
 	$rootScope.to_trusted = function(html_code) {
@@ -154,35 +164,48 @@ ideControllers.controller('BaseController', ['$scope', '$uibModal', '$log', '$sc
 			dataService.instance.client.on('/SYSTEM/CONFIG', function(data){
 				dataBindConfig($rootScope,data);
 			}, function(e){
-				dataService.instance.client.get('/PROJECTS/Project/*', {"criteria":{"type":"Project"}}, function(e, projects){
 
-					projects.map(function(project){
+				dataService.instance.client.get('/BLUEPRINTS/Blueprint/*', {"criteria":{"type":"Blueprint"}}, function(e, blueprints){
+
+					if (e) throw e;
+
+					blueprints.map(function(blueprint){
 						//cacheLocation, type, item
-						$rootScope.addProject(project);
+						$rootScope.addBlueprint(blueprint);
 					});
 
-					$rootScope.data.session.status = 'connected';
-					$rootScope.data.session.user = '_ADMIN';
+					dataService.instance.client.get('/PROJECTS/Project/*', {"criteria":{"type":"Project"}}, function(e, projects){
 
-					dataService.instance.client.onEvent('reconnect-scheduled', function(data){
-						$rootScope.data.session.status = 'reconnecting';
-						$rootScope.$apply();
-					});
+						if (e) throw e;
 
-					dataService.instance.client.onEvent('reconnect-successful', function(data){
+						projects.map(function(project){
+							//cacheLocation, type, item
+							$rootScope.addProject(project);
+						});
+
 						$rootScope.data.session.status = 'connected';
+						$rootScope.data.session.user = '_ADMIN';
+
+						dataService.instance.client.onEvent('reconnect-scheduled', function(data){
+							$rootScope.data.session.status = 'reconnecting';
+							$rootScope.$apply();
+						});
+
+						dataService.instance.client.onEvent('reconnect-successful', function(data){
+							$rootScope.data.session.status = 'connected';
+							$rootScope.$apply();
+						});
+
+						dataService.instance.client.onEvent('connection-ended', function(data){
+							$rootScope.data.session.status = 'connection terminated';
+							$rootScope.$apply();
+						});
+
 						$rootScope.$apply();
+
+
+
 					});
-
-					dataService.instance.client.onEvent('connection-ended', function(data){
-						$rootScope.data.session.status = 'connection terminated';
-						$rootScope.$apply();
-					});
-
-					$rootScope.$apply();
-
-
-
 				});
 			})
 
@@ -265,6 +288,46 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 
   	function populateBranch(branch){
 
+  		if (branch.type == 'Blueprint'){
+
+  			var addBlueprintItem = function(blueprintName, item){
+  				if ($rootScope.nomenclature[item.type]){
+					$rootScope.data.cache.Blueprints[blueprintName][$rootScope.nomenclature[item.type] + 's'][item.name] = item;
+				}else{
+					console.log(':::', $rootScope.data.cache.Blueprints, item.type);
+					$rootScope.data.cache.Blueprints[blueprintName][item.type + 's'][item.name] = item;
+				}
+
+  			}
+
+  			dataService.instance.client.on(branch._meta.path + '/*', function(data, meta){
+
+  				if (['Generator','Template'].indexOf(data.type) > -1)
+  				{
+  					data._meta = meta;
+
+  					if (data.blueprint == branch._meta.path){
+  						addBlueprintItem(branch.name, data);
+  						$rootScope.$apply();
+  					}
+  				}
+		  	},
+		  	function(e, eventId){
+		  		eventHandlers[branch._meta.path] = eventId;
+		  	});
+
+  			console.log('GETTING /BLUEPRINTS/' + branch._meta.path + '/*:::');
+
+  			dataService.instance.client.get(branch._meta.path + '/*', function(e, items){
+
+  				items.map(function(item){
+  					addBlueprintItem(branch.name, item);
+  				});
+
+  				$rootScope.$apply();
+  			});
+  		}
+
   		if (branch.type == 'Project'){
 
   			var addProjectItem = function(projectName, item){
@@ -343,6 +406,35 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 
 }]);
 
+ideControllers.controller('NewItemController', function ($scope, $log) {
+
+  $scope.newItems = [
+  	{label:'Blueprint', template:'blueprint_new', controller:'blueprint_new'},
+  	{label:'Template', template:'template_new', controller:'directive_new'},
+  	{label:'Generator', template:'generator_new', controller:'directive_new'},
+    {label:'Project', template:'project_new', controller:'project_new'},
+    {label:'Directive', template:'directive_new', controller:'directive_new'},
+    {label:'Control', template:'control_new', controller:'control_new'},
+    {label:'Droid', template:'droid_new', controller:'droid_new'},
+    {label:'Flow', template:'flow_new', controller:'flow_new'},
+  ];
+
+  $scope.status = {
+    isopen: false
+  };
+
+  $scope.toggled = function(open) {
+    $log.log('Dropdown is now: ', open);
+  };
+
+  $scope.toggleDropdown = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.status.isopen = !$scope.status.isopen;
+  };
+
+  $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+});
 
 ideControllers.controller('ModalContentController', ['$scope', '$uibModal', '$log', 'dataService', function($scope, $uibModal, $log, dataService) {
 
