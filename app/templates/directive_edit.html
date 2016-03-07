@@ -1,26 +1,26 @@
-<div class="editor-container" ng-controller="directive_edit">
-	<form class="form-horizontal" role="form" >
-      <div ng-show="collapsed" class="form-group">
-        <label for="flowName" class="col-sm-2 control-label">Name</label>
+<div class="editor-container" ng-controller="directive_edit" style="background-color:#5e5e5e">
+	<form ng-show="propertiesVisible" class="form-horizontal" role="form" style="padding:10px">
+      <div class="form-group">
+        <label for="templateName" class="col-sm-2 control-label" style="color:white">Name</label>
         <div class="col-sm-10">
-          <input class="form-control" id="flowName" placeholder="Name" ng-model="flow.name"></input>
+          <input class="form-control" id="templateName" placeholder="Name" ng-model="directive.name"></input>
         </div>
       </div>
-      <div ng-show="collapsed" class="form-group">
-        <label for="flowDescription" class="col-sm-2 control-label">Description</label>
+      <div class="form-group">
+        <label for="templateDescription" class="col-sm-2 control-label" style="color:white">Description</label>
         <div class="col-sm-10">
-          <textarea id="flowDescription" class="form-control" rows="3" placeholder="Description" ng-model="flow.description"></textarea>
+          <textarea id="templateDescription" class="form-control" rows="3" placeholder="Description" ng-model="directive.description"></textarea>
         </div>
       </div>
-       <div ng-show="collapsed" class="form-group">
-        <label for="flowDescription" class="col-sm-2 control-label">Mode</label>
+       <div class="form-group">
+        <label for="templateDescription" class="col-sm-2 control-label" style="color:white">Mode</label>
         <div class="col-sm-10">
-          <select ng-model="editorSetup.mode">
+          <select ng-model="directive.mode" class="form-control" ng-change="updateMode()">
           	<option>javascript</option>
           	<option>html</option>
           </select>
         </div>
       </div>
      </form>
-  	<div ng-model="editorCode" class="js-editor" ui-ace="editorSetup"></div>
+	 <div ng-model="editorCode" class="js-editor" ui-ace="editorSetup"></div>
 </div>

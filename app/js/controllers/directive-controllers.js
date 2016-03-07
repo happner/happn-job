@@ -44,7 +44,7 @@ ideControllers.controller('directive_new', ['$scope', '$uibModalInstance', 'data
 
 }]);
 
-ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSession', function($scope, dataService, AppSession) {
+ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSession', 'hotkeys', function($scope, dataService, AppSession, hotkeys) {
 
 	console.log('scope gen:::', $scope.generator);
 
@@ -91,7 +91,7 @@ ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSessio
 
 			dataService.instance.client.on($scope.directive._meta.path, function(data, _meta){
 
-			 	$scope.notify('directive updated', 'info');
+			 	$scope.notify('directive updated', 'info', 5000);
 			 	$scope.editorCode = base64.decode(data.currentCode);
 
 			 }, function(e){
@@ -126,11 +126,15 @@ ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSessio
 		initDirective();
 	}
 
- 	var onSave = function(args){
+	var save = function(){
 		 $scope.directive.currentCode = base64.encode($scope.editorCode);
 		 dataService.instance.client.set($scope.directive._meta.path, $scope.directive, {merge:true}, function(e, response){
 		 	if (e) $scope.notify('saving directive failed', 'danger');
 		 });
+	};
+
+ 	var onSave = function(args){
+		save();
 	};
 
 	var actions = [
@@ -172,5 +176,27 @@ ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSessio
 
 	$scope.actions = actions;
 	$scope.$emit('editor_loaded', actions);
+
+	hotkeys.bindTo($scope)
+    .add({
+      combo: 'ctrl+s',
+      description: 'save',
+      callback: function() {
+      	save();
+      }
+    })
+    .add({
+      combo: 'command+s',
+      description: 'save',
+      callback: function(e) {
+
+      	if (e && e.preventDefault){
+      		console.log('prevented default:::');
+      		e.preventDefault();
+      	}
+      	save();
+      	return false;
+      }
+    })
 
 }]);
