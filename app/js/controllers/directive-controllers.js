@@ -55,6 +55,31 @@ ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSessio
 		obj:'directive'
 	}
 
+	$scope.aceLoaded = function(){
+
+	};
+
+	$scope.aceChanged = function(){
+
+	};
+
+	$scope.propertiesVisible = false;
+
+	$scope.editorSetup = {
+	  useWrapMode : true,
+	  showGutter: true,
+	  theme:'eclipse',
+	  mode: 'javascript',
+	  onLoad: 'aceLoaded',
+	  onChange: 'aceChanged'
+	}
+
+	var onToggleProperties = function (args) {
+        $scope.propertiesVisible = !$scope.propertiesVisible;
+        console.log('MADE VISIBLE:::', $scope.propertiesVisible);
+        //$scope.$apply();
+    };
+
 	var initDirective = function(){
 		if ($scope.directive.currentCode == null)
 			$scope.directive.currentCode = AppSession.defaultDirectiveCode;
@@ -83,10 +108,18 @@ ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSessio
 
 		$scope.directive = $scope[settings.obj];
 
+		if ($scope.directive.mode)
+			$scope.editorSetup.mode = $scope.directive.mode;
+
 		$scope.directive.type = controllerSettings.directiveTypeName;
 		$scope.directive[controllerSettings.parentPropertyName] = '';
 
 		initDirective();
+	}
+
+	$scope.updateMode = function(){
+		console.log('updating mode');
+		$scope.editorSetup.mode = $scope.directive.mode;
 	}
 
 	if ($scope.directive){
@@ -101,6 +134,11 @@ ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSessio
 	};
 
 	var actions = [
+	{
+        text: 'properties',
+        handler: onToggleProperties,
+        cssClass: 'glyphicon glyphicon-align-justify'
+    },
 	{
 		text:'undo',
 		handler:onSave,
@@ -134,13 +172,5 @@ ideControllers.controller('directive_edit', ['$scope', 'dataService', 'AppSessio
 
 	$scope.actions = actions;
 	$scope.$emit('editor_loaded', actions);
-
-	$scope.aceLoaded = function(){
-
-	};
-
-	$scope.aceChanged = function(){
-
-	};
 
 }]);
