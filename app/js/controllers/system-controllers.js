@@ -52,7 +52,8 @@ ideControllers.controller('BaseController', ['$scope', '$uibModal', '$log', '$sc
 
 	$rootScope.addBlueprint = function(blueprint){
 
-		blueprint.Templates = {};
+		blueprint['Control Templates'] = {};
+		blueprint['Directive Templates'] = {};
 		blueprint.Generators = {};
 
 		return $rootScope.data.cache.Blueprints[blueprint.name] = blueprint;
@@ -110,6 +111,9 @@ ideControllers.controller('BaseController', ['$scope', '$uibModal', '$log', '$sc
 		  var returnArray = [];
 		  for (var item in items)
 			  returnArray.push(item);
+
+			console.log('returning array:::', returnArray);
+
 		  return returnArray;
 	};
 
@@ -239,7 +243,7 @@ ideControllers.controller('ContentController', ['$scope', '$rootScope', '$uibMod
 
 	 		$scope[item.type.toLowerCase()] = data;
 
-	 		$rootScope.data.templatePath = '../templates/' + item.type.toLowerCase() + '_edit.html';
+	 		$rootScope.data.templatePath = '../templates/' + item.type.toLowerCase().replace(/ /g,'_') + '_edit.html';
 
 	 		console.log('opening control of type:::', item);
 
@@ -302,7 +306,7 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 
   			dataService.instance.client.on(branch._meta.path + '/*', function(data, meta){
 
-  				if (['Generator','Template'].indexOf(data.type) > -1)
+  				if (['Generator','Control Template','Directive Template'].indexOf(data.type) > -1)
   				{
   					data._meta = meta;
 
@@ -410,13 +414,14 @@ ideControllers.controller('NewItemController', function ($scope, $log) {
 
   $scope.newItems = [
   	{label:'Blueprint', template:'blueprint_new', controller:'blueprint_new'},
-  	{label:'Template', template:'template_new', controller:'directive_new'},
+  	{label:'Control Template', template:'control_template_new', controller:'directive_new'},
+  	{label:'Directive Template', template:'directive_template_new', controller:'directive_new'},
   	{label:'Generator', template:'generator_new', controller:'directive_new'},
     {label:'Project', template:'project_new', controller:'project_new'},
     {label:'Directive', template:'directive_new', controller:'directive_new'},
-    {label:'Control', template:'control_new', controller:'control_new'},
+    {label:'Control', template:'control_new', controller:'directive_new'},
     {label:'Droid', template:'droid_new', controller:'droid_new'},
-    {label:'Flow', template:'flow_new', controller:'flow_new'},
+    {label:'Assembly line', template:'flow_new', controller:'flow_new'},
   ];
 
   $scope.status = {

@@ -1,7 +1,9 @@
-ideControllers.controller('project_new', ['$scope', '$uibModalInstance', 'dataService', function($scope, $uibModalInstance, dataService) {
+ideControllers.controller('project_new', ['$scope', '$uibModalInstance', 'dataService', 'utils', function($scope, $uibModalInstance, dataService, utils) {
 
 	  $scope.message = {type:'alert-warning', message:'', display:'none'};
 	  $scope.project = {name:'', description:'', type:'Project'};
+
+	  $scope.utils = utils;
 
 	  $scope.ok = function () {
 
