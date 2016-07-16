@@ -166,7 +166,7 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
             $scope.flow.drawing = {
             	id:'sector_0_0',
                 styles: {},
-                shapeClass: 'window',
+                shapeClass: 'shape',
                 shapes: [],
                 connections: [],
                 config: {
