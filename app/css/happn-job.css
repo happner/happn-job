@@ -52,7 +52,6 @@ body {
 	margin-right:0px;
 	color:white;
 	font-weight:bold;
-	padding:3px;
 	cursor:pointer;
 	height:40px;
 }
@@ -101,3 +100,4 @@ body {
 	border-bottom-left-radius:5px;
 	border-top-right-radius:5px;
 }
+

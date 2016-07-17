@@ -57,46 +57,6 @@
 	border-radius: 100px / 50px;
 }
 
-.flowchart .shape.triangle-up {
-	width: 0;
-	height: 0;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	border-bottom: 100px solid #346789;
-}
-
-.flowchart .shape.triangle-down {
-	width: 0;
-	height: 0;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	border-top: 100px solid #346789;
-}
-
-.flowchart .shape.triangle-left {
-	width: 0;
-	height: 0;
-	border-top: 50px solid transparent;
-	border-right: 100px solid #346789;
-	border-bottom: 50px solid transparent;
-}
-
-.flowchart .shape.triangle-right {
-	width: 0;
-	height: 0;
-	border-top: 50px solid transparent;
-	border-left: 100px solid #346789;
-	border-bottom: 50px solid transparent;
-}
-
-.flowchart .shape.trapezoid {
-	border-bottom: 100px solid #346789;
-	border-left: 50px solid transparent;
-	border-right: 50px solid transparent;
-	height: 0;
-	width: 100px;
-}
-
 .flowchart .shape .action-container {
 	display:none;
 	top:15px;
@@ -120,28 +80,22 @@
 	font-size:2em;
 	position:relative;
 	bottom:-45px;
-	right:-15px;
+	right:-20px;
 	display:none;
 }
 
-.flowchart .shape.diamond {
-	width: 0;
-	height: 0;
-	border: 50px solid transparent;
-	border-bottom-color: #346789;
-	position: relative;
-	top: -50px;
+.flowchart .shape.active {
+	box-shadow: 2px 2px 19px green;
+	-o-box-shadow: 2px 2px 19px green;
+	-webkit-box-shadow: 2px 2px 19px green;
+	-moz-box-shadow: 2px 2px 19px green;
 }
 
-.flowchart .shape.diamond:after {
-	content: '';
-	position: absolute;
-	left: -50px;
-	top: 50px;
-	width: 0;
-	height: 0;
-	border: 50px solid transparent;
-	border-top-color: #346789;
+.flowchart .shape.error {
+	box-shadow: 2px 2px 19px red;
+	-o-box-shadow: 2px 2px 19px red;
+	-webkit-box-shadow: 2px 2px 19px red;
+	-moz-box-shadow: 2px 2px 19px red;
 }
 
 /*
@@ -195,6 +149,20 @@
 	border:none;
 }
 
+.flowchart-container.map .shape.active {
+	box-shadow: 2px 2px 19px green;
+	-o-box-shadow: 2px 2px 19px green;
+	-webkit-box-shadow: 2px 2px 19px green;
+	-moz-box-shadow: 2px 2px 19px green;
+}
+
+.flowchart-container.map .shape.error {
+	box-shadow: 2px 2px 19px red;
+	-o-box-shadow: 2px 2px 19px red;
+	-webkit-box-shadow: 2px 2px 19px red;
+	-moz-box-shadow: 2px 2px 19px red;
+}
+
 .flowchart-container.map .shape #shape_label {
 	display:none;
 }
@@ -223,6 +191,11 @@
 	display:inline-block;
 }
 
+.flowchart-container.map .shape .icon .action {
+	margin-top:-6;
+	margin-left:-3
+}
+
 .flowchart ._jsPlumb_connector { z-index:4; }
 .flowchart ._jsPlumb_endpoint, .endpointTargetLabel, .endpointSourceLabel{ z-index:21;cursor:pointer; }
 
@@ -237,6 +210,7 @@
 	filter:alpha(opacity=80);
 	cursor: pointer;
 }
+
 .flowchart .aLabel._jsPlumb_hover {
 	background-color:#5C96BC;
 	color:white;
@@ -257,3 +231,4 @@
 	border-left:1px solid whitesmoke;
 	font-size:28px;
 	border-bottom:1px solid whitesmoke;
+}

@@ -25,7 +25,7 @@ angular.module('ui.jsPlumb', [])
 				drawingMethod:'=',
 				redraw:'='
 			},
-			template: '<div class="demo flowchart" id="{{drawingData.id}}">' +
+			template: '<div class="flowchart" id="{{drawingData.id}}">' +
 			'<div ng-repeat="shape in drawingData.shapes" ' +
 			'class="{{drawingData.shapeClass + \' \' + (shape.cssClass?shape.cssClass:\'rect\')}}" ' +
 			'uib-tooltip-template="\'/templates\/tooltip_shape.html\'" ' +
@@ -38,7 +38,7 @@ angular.module('ui.jsPlumb', [])
 			'<i ng-click="drawingEvent(\'shape-clicked\', shape)" class="action glyphicon glyphicon-pencil"></i>' +
 			'</span>' +
 			'<span class="icon">' +
-			'<i class="action fa fa-{{shape.icon?shape.icon:\'cube\'}}"></i>' +
+			'<i class="action glyphicons glyphicons-{{shape.icon?shape.icon:\'robot\'}}"></i>' +
 			'</span>' +
 			'<span class="shape-drag">' +
 			'<i class="fa fa-arrows"></i>' +

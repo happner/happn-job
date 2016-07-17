@@ -219,18 +219,41 @@ ideControllers.controller('flow_edit', ['$scope','dataService', 'utils',
             $scope.$apply();
         };
 
+        var viewMap = function(){
+
+            var myEl = angular.element( document.querySelector( '.flowchart-container' ) );
+            myEl.removeClass('map');
+            myEl.addClass('map');
+
+        };
+
+        var viewFlow = function(){
+
+            var myEl = angular.element( document.querySelector( '.flowchart-container' ) );
+            myEl.removeClass('map');
+
+        };
+
         var actions = [{
+            text: 'map view',
+            handler: viewMap,
+            cssClass: 'glyphicons glyphicons-map-marker'
+        },{
+            text: 'flow view',
+            handler: viewFlow,
+            cssClass: 'glyphicons glyphicons-flowchart'
+        },{
             text: 'properties',
             handler: onToggleProperties,
-            cssClass: 'glyphicon glyphicon-align-justify'
+            cssClass: 'glyphicons glyphicons-menu-hamburger'
         },{
             text: 'save',
             handler: onSave,
-            cssClass: 'glyphicon glyphicon-floppy-disk'
+            cssClass: 'glyphicons glyphicons-floppy-disk'
         },{
             text: 'delete',
             handler: onDelete,
-            cssClass: 'glyphicon glyphicon-remove'
+            cssClass: 'glyphicons glyphicons-remove'
         }];
 
         $scope.actions = actions;
