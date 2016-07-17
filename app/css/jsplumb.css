@@ -176,7 +176,7 @@
 	border:1px dotted red;
 }
 
-.flowchart .shape.marker {
+.flowchart-container.map .shape {
 	box-shadow: 2px 2px 19px #aaa;
 	-o-box-shadow: 2px 2px 19px #aaa;
 	-webkit-box-shadow: 2px 2px 19px #aaa;
@@ -195,24 +195,32 @@
 	border:none;
 }
 
-.flowchart .shape.marker #shape_label {
+.flowchart-container.map .shape #shape_label {
 	display:none;
 }
 
-.flowchart .shape.marker .action-container {
+.flowchart-container.map .shape .action-container {
 	display:none;
 }
 
-.flowchart .shape.marker .shape-drag {
+.flowchart-container.map .shape .shape-drag {
 	display:none;
 }
 
-.flowchart .shape.marker .icon {
+.flowchart-container.map .shape .icon {
 	top:6px;
 }
 
-.flowchart .shape.marker .jsplumb-endpoint {
+.flowchart-container.map .jsplumb-endpoint {
 	display:none;
+}
+
+.flowchart-container.map .jsplumb-connector {
+	display:none;
+}
+
+.flowchart-container.map .shape:hover .icon {
+	display:inline-block;
 }
 
 .flowchart ._jsPlumb_connector { z-index:4; }

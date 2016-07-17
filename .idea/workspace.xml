@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b0bf3d1-bd40-47c2-bb62-2de72db74335" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/css/happn-job.css" afterPath="$PROJECT_DIR$/app/css/happn-job.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/css/jsplumb.css" afterPath="$PROJECT_DIR$/app/css/jsplumb.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/directives/ui-jsplumb.js" afterPath="$PROJECT_DIR$/app/js/directives/ui-jsplumb.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/flow_edit.html" afterPath="$PROJECT_DIR$/app/templates/flow_edit.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/happn-job.nedb" afterPath="$PROJECT_DIR$/db/happn-job.nedb" />
     </list>
     <ignored path="happn-job.iws" />
@@ -40,8 +37,8 @@
       <file leaf-file-name="jsplumb.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/css/jsplumb.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="214" column="17" selection-start-line="214" selection-start-column="17" selection-end-line="214" selection-end-column="17" />
+            <state relative-caret-position="327">
+              <caret line="219" column="1" selection-start-line="219" selection-start-column="1" selection-end-line="219" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -130,8 +127,8 @@
       <file leaf-file-name="ui-jsplumb.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/js/directives/ui-jsplumb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+            <state relative-caret-position="600">
+              <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
               <folding>
                 <marker date="1468746374000" expanded="true" signature="1942:1974" placeholder="..." />
               </folding>
@@ -348,12 +345,12 @@
       <workItem from="1465479710210" duration="11004000" />
       <workItem from="1465627361487" duration="672000" />
       <workItem from="1467211041163" duration="683000" />
-      <workItem from="1468656941287" duration="5990000" />
+      <workItem from="1468656941287" duration="7060000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32629000" />
+    <option name="totallyTimeSpent" value="33699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="955" extended-state="6" />
@@ -774,8 +771,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/js/directives/ui-jsplumb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+        <state relative-caret-position="600">
+          <caret line="178" column="49" selection-start-line="178" selection-start-column="49" selection-end-line="178" selection-end-column="49" />
           <folding>
             <marker date="1468746374000" expanded="true" signature="1942:1974" placeholder="..." />
           </folding>
@@ -784,8 +781,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/css/jsplumb.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="214" column="17" selection-start-line="214" selection-start-column="17" selection-end-line="214" selection-end-column="17" />
+        <state relative-caret-position="327">
+          <caret line="219" column="1" selection-start-line="219" selection-start-column="1" selection-end-line="219" selection-end-column="1" />
           <folding />
         </state>
       </provider>
