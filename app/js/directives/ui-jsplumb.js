@@ -32,7 +32,7 @@ angular.module('ui.jsPlumb', [])
 			'tooltip-placement="bottom" ' +
 			'style="{{shape.style + shape.position}}" ' +
 			'id="{{\'flowchart\' + shape.id}}">' +
-			'<br/><strong>{{ shape.label.length > 20?shape.label.substring(0,17) + "..." : shape.label }}</strong><br/>' +
+			'<br id=\'shape_label\'/><strong id=\'shape_label\'>{{ shape.label.length > 20?shape.label.substring(0,17) + "..." : shape.label }}</strong><br id=\'shape_label\'/>' +
 			'<span class="action-container">' +
 			'<i class="action glyphicon glyphicon-remove"></i>' +
 			'<i ng-click="drawingEvent(\'shape-clicked\', shape)" class="action glyphicon glyphicon-pencil"></i>' +

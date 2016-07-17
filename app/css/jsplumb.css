@@ -169,12 +169,50 @@
 	display:inline-block;
 }
 
-
 .flowchart .active {
 	border:1px dotted green;
 }
 .flowchart .hover {
 	border:1px dotted red;
+}
+
+.flowchart .shape.marker {
+	box-shadow: 2px 2px 19px #aaa;
+	-o-box-shadow: 2px 2px 19px #aaa;
+	-webkit-box-shadow: 2px 2px 19px #aaa;
+	-moz-box-shadow: 2px 2px 19px #aaa;
+	opacity:0.8;
+	filter:alpha(opacity=80);
+	font-family:helvetica;padding:0.3em;
+	font-size:0.5em;
+	cursor:move;
+	text-align:center;
+	z-index:20;
+	position:absolute;
+	color:black;
+	width:30px;
+	height:30px;
+	border:none;
+}
+
+.flowchart .shape.marker #shape_label {
+	display:none;
+}
+
+.flowchart .shape.marker .action-container {
+	display:none;
+}
+
+.flowchart .shape.marker .shape-drag {
+	display:none;
+}
+
+.flowchart .shape.marker .icon {
+	top:6px;
+}
+
+.flowchart .shape.marker .jsplumb-endpoint {
+	display:none;
 }
 
 .flowchart ._jsPlumb_connector { z-index:4; }
