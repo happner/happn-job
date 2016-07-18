@@ -92,8 +92,11 @@ ideControllers.controller('droid_edit', ['$scope', 'dataService', 'utils', 'AppS
 
 			$scope.$apply();
 		});
-	}
+	};
 
+	$scope.selectIcon = function(){
+		
+	};
 
 	var onSave = function(args){
 		if (!$scope.droid.name) return $scope.notify('your droid needs a name', 'warning', 0, true);
