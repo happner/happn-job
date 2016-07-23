@@ -2,6 +2,7 @@
   "name": "happen-job",
   "description": "jobs powered by happn",
   "version": "0.0.1",
+  "license": "MIT",
   "dependencies": {
     "bower": "^1.7.7",
     "connect": "^3.4.1",
