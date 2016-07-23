@@ -2,28 +2,192 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b0bf3d1-bd40-47c2-bb62-2de72db74335" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENSE.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/js/controllers/icon-controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/css/happn-job.css" afterPath="$PROJECT_DIR$/app/css/happn-job.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/css/jsplumb.css" afterPath="$PROJECT_DIR$/app/css/jsplumb.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.htm" afterPath="$PROJECT_DIR$/app/index.htm" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/app.js" afterPath="$PROJECT_DIR$/app/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/droid-controllers.js" afterPath="$PROJECT_DIR$/app/js/controllers/droid-controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/flow-controllers.js" afterPath="$PROJECT_DIR$/app/js/controllers/flow-controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/step-controllers.js" afterPath="$PROJECT_DIR$/app/js/controllers/step-controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/controllers/system-controllers.js" afterPath="$PROJECT_DIR$/app/js/controllers/system-controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/directives/client-scripts.js" afterPath="$PROJECT_DIR$/app/js/directives/client-scripts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/js/directives/ui-jsplumb.js" afterPath="$PROJECT_DIR$/app/js/directives/ui-jsplumb.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/lib/components/angular/.bower.json" afterPath="$PROJECT_DIR$/app/lib/components/angular/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/droid_edit.html" afterPath="$PROJECT_DIR$/app/templates/droid_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/flow_edit.html" afterPath="$PROJECT_DIR$/app/templates/flow_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/flow_new.html" afterPath="$PROJECT_DIR$/app/templates/flow_new.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/icon_select.html" afterPath="$PROJECT_DIR$/app/templates/icon_select.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/tooltip_shape.html" afterPath="$PROJECT_DIR$/app/templates/tooltip_shape.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/Gruntfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/MIT-LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/angular-awesome-slider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/angular-awesome-slider.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/css/angular-awesome-slider.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.blue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.blue.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.plastic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.plastic.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.round.plastic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.round.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.round.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/dist/img/jslider.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/core/config/constants.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/core/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/core/model/draggable.factory.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/core/model/pointer.factory.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/core/model/slider.factory.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/core/template/slider.tmpl.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/core/utils/utils.factory.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/angular-awesome-slider.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/less/main.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/less/skin-blue.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/less/skin-css.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/less/skin-plastic.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/less/skin-round.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/less/variables.less" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/core/_variables.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/horizontal/_horizontal.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/horizontal/_labels.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/horizontal/_main.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/horizontal/_pointers-value.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/horizontal/_pointers.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/horizontal/_ranges.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/horizontal/_scale.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/main.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/skins/_skin-blue.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/skins/_skin-css.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/skins/_skin-plastic.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/skins/_skin-round.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/vertical/_labels.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/vertical/_main.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/vertical/_pointers-value.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/vertical/_pointers.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/vertical/_ranges.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/vertical/_scales.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/sass/vertical/_vertical.sass" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/core/_variables.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/horizontal/_horizontal.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/horizontal/_labels.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/horizontal/_main.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/horizontal/_pointers-value.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/horizontal/_pointers.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/horizontal/_ranges.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/horizontal/_scale.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/main.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/skins/_skin-blue.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/skins/_skin-css.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/skins/_skin-plastic.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/skins/_skin-round.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/vertical/_labels.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/vertical/_main.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/vertical/_pointers-value.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/vertical/_pointers.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/vertical/_ranges.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/vertical/_scales.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/css/scss/vertical/_vertical.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.blue.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.blue.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.plastic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.plastic.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.round.plastic.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.round.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.round.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/img/jslider.vertical.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-awesome-slider/src/jquery.slider.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/dist/angular-simple-logger.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/dist/angular-simple-logger.light.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/dist/angular-simple-logger.light.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/dist/angular-simple-logger.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/dist/browser.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/dist/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/angular-simple-logger/dist/index.light.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/desandro-matches-selector/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/desandro-matches-selector/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/desandro-matches-selector/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/desandro-matches-selector/matches-selector.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/fizzy-ui-utils/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/fizzy-ui-utils/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/fizzy-ui-utils/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/fizzy-ui-utils/utils.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/get-size/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/get-size/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/get-size/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/get-size/get-size.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/imagesloaded/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/imagesloaded/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/imagesloaded/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/imagesloaded/gulpfile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/imagesloaded/imagesloaded.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/imagesloaded/imagesloaded.pkgd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/imagesloaded/imagesloaded.pkgd.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/jquery-bridget/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/jquery-bridget/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/jquery-bridget/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/jquery-bridget/jquery-bridget.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/CHANGELOG.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/CONTRIBUTING.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/Jakefile.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/PLUGIN-GUIDE.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/component.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/images/layers-2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/images/layers.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/images/marker-icon-2x.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/images/marker-icon.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/images/marker-shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/leaflet-src.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/leaflet.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/dist/leaflet.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/leaflet/package.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/masonry/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/masonry/README.mdown" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/masonry/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/masonry/dist/masonry.pkgd.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/masonry/dist/masonry.pkgd.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/masonry/masonry.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/outlayer/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/outlayer/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/outlayer/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/outlayer/item.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/outlayer/outlayer.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/.bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/bower.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/coffeelint.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/dot/all.dot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/dot/legend.dot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/dot/modules.dot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/dot/modules/ui-leaflet.dot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/png/all.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/png/legend.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/png/modules.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/architecture/png/modules/ui-leaflet.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/ui-leaflet.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/ui-leaflet.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/ui-leaflet.min.no-header.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/ui-leaflet_dev_mapped.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/dist/ui-leaflet_dev_mapped.js.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/generate-examples.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/aliases.yaml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/angular_architecture_graph.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/bower.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/bump.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/changelog.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/clean.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/concat.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/concurrent.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/connect.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/coveralls.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/jshint.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/karma.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/ngAnnotate.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/open.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/pkg.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/protractor.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/shell.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/uglify.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/utils/banner.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/utils/getAvailPort.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/grunt/watch.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/lib/components/ui-leaflet/logo.svg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/happn-job.nedb" afterPath="$PROJECT_DIR$/db/happn-job.nedb" />
     </list>
     <ignored path="happn-job.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,11 +208,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bower.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="bower.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bower.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            <state relative-caret-position="315">
+              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -67,7 +241,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LICENSE.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="LICENSE.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/LICENSE.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
@@ -152,22 +326,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="icon_select.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/icon_select.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="27" column="63" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="63" />
-              <folding>
-                <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1468851550000" expanded="true" signature="738:1177" placeholder="..." />
-                <marker date="1468851550000" expanded="true" signature="782:1166" placeholder="..." />
-                <marker date="1468851550000" expanded="true" signature="954:1151" placeholder="..." />
-                <marker date="1468851550000" expanded="true" signature="1042:1131" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -194,9 +352,9 @@
         <option value="$PROJECT_DIR$/app/css/jsplumb.css" />
         <option value="$PROJECT_DIR$/app/templates/flow_new.html" />
         <option value="$PROJECT_DIR$/app/templates/flow_edit.html" />
-        <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/LICENSE.txt" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/bower.json" />
       </list>
     </option>
   </component>
@@ -252,6 +410,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="happn-job" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="happn-job" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="happn-job" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="happn-job" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="happn-job" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -339,16 +529,16 @@
       <workItem from="1465479710210" duration="11004000" />
       <workItem from="1465627361487" duration="672000" />
       <workItem from="1467211041163" duration="683000" />
-      <workItem from="1468656941287" duration="37185000" />
+      <workItem from="1468656941287" duration="37910000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63824000" />
+    <option name="totallyTimeSpent" value="64549000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="953" extended-state="0" />
-    <editor active="false" />
+    <frame x="0" y="23" width="1680" height="953" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2857143" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -672,14 +862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/index.htm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -712,7 +894,7 @@
         <state relative-caret-position="375">
           <caret line="27" column="63" selection-start-line="27" selection-start-column="63" selection-end-line="27" selection-end-column="63" />
           <folding>
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
             <marker date="1468851550000" expanded="true" signature="738:1177" placeholder="..." />
             <marker date="1468851550000" expanded="true" signature="782:1166" placeholder="..." />
             <marker date="1468851550000" expanded="true" signature="954:1151" placeholder="..." />
@@ -784,14 +966,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -807,6 +981,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding />
         </state>
       </provider>
