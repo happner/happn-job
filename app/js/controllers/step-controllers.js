@@ -1,4 +1,4 @@
-ideControllers.controller('step_edit', ['$scope', '$uibModalInstance', 'data', 'args', 'dataService', function($scope, $uibModalInstance, data, args, dataService) {
+ideControllers.controller('step_edit', ['$scope', '$uibModalInstance', 'data', 'args', 'dataService', '$rootScope', function($scope, $uibModalInstance, data, args, dataService, $rootScope) {
 
 	console.log('step edit:::', args);
 	$scope.step = {type: 'Step'};
@@ -20,18 +20,20 @@ ideControllers.controller('step_edit', ['$scope', '$uibModalInstance', 'data', '
 	    $uibModalInstance.dismiss('cancel');
 	};
 
-	console.log('our control:::', args);
+	dataService.instance.client.get(args.dataPath, function(e, data){
 
-	dataService.instance.client.get(args.droid, function(e, droid){
-		console.log('got droid:::', droid);
+		if (data.type == 'Droid'){
+			dataService.instance.client.get(data.control, function(e, control){
+				var html = base64.decode(control.currentCode);
+				$scope.html = html;
+				$scope.$apply();
+			});
+		}
 
-		dataService.instance.client.get(droid.control, function(e, control){
-			console.log('got control:::', control);
-			var html = base64.decode(control.currentCode);
-			console.log('got control html:::', html);
-			$scope.html = html;
-			$scope.$apply();
-		});
+		if (data.type == 'Flow'){
+			$uibModalInstance.dismiss('cancel');
+			$rootScope.$broadcast('editItemSelected', data);
+		}
 
 	});
 

@@ -29,6 +29,8 @@ angular.module('ui.jsPlumb', [])
 			'<div ng-repeat="shape in drawingData.shapes" ' +
 			'class="{{drawingData.shapeClass + \' \' + (shape.cssClass?shape.cssClass:\'rect\')}}" ' +
 			'uib-tooltip-template="\'/templates\/tooltip_shape.html\'" ' +
+			'tooltip-popup-close-delay=2000 ' +
+			'tooltip-popup-delay=1000 ' +
 			'tooltip-placement="bottom" ' +
 			'style="{{shape.style + shape.position}}" ' +
 			'id="{{\'flowchart\' + shape.id}}">' +

@@ -101,3 +101,31 @@ body {
 	border-top-right-radius:5px;
 }
 
+.icon-grid-container {
+	width:100%;
+	height:400px;
+	overflow:scroll
+}
+
+.icon-grid {
+	width: 85px;
+	height: 50px;
+	outline: 1px solid whitesmoke;
+	float: left;
+	text-align:center;
+}
+
+.icon-grid span {
+	font-size:2em;
+}
+
+.icon-grid span:hover {
+	cursor:pointer;
+	border:3px solid whitesmoke;
+}
+
+.icon-label {
+	display:none;
+}
+
+

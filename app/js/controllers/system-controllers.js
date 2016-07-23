@@ -231,11 +231,8 @@ ideControllers.controller('ContentController', ['$scope', '$rootScope', '$uibMod
 
 	  $scope.$on('editItemSelected', function(event, item) {
 
-	  	//$templateCache.remove('../templates/' + item.type.toLowerCase() + '_edit.html');
 	  	$rootScope.data.templatePath = '../templates/blank.html';
-		$rootScope.$apply();
-
-		console.log('editItemSelected:::',item);
+			$rootScope.$apply();
 
 	  	dataService.instance.client.get(item._meta.path, function(e, data){
 
@@ -244,8 +241,6 @@ ideControllers.controller('ContentController', ['$scope', '$rootScope', '$uibMod
 	 		$scope[item.type.toLowerCase()] = data;
 
 	 		$rootScope.data.templatePath = '../templates/' + item.type.toLowerCase().replace(/ /g,'_') + '_edit.html';
-
-	 		console.log('opening control of type:::', item);
 
 			$rootScope.$apply();
 
@@ -396,9 +391,7 @@ ideControllers.controller('TreeController',  ['$scope', '$rootScope', 'dataServi
 	};
 
 	$scope.my_tree_handler = function(branch) {
-
-		console.log('my tree handler:::');
-
+		
 		$scope.meta.selected = branch.path;
 		if (branch._meta)
 			 $rootScope.$broadcast('editItemSelected', branch);

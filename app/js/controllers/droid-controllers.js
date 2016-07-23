@@ -76,8 +76,6 @@ ideControllers.controller('droid_edit', ['$scope', 'dataService', 'utils', 'AppS
 			$scope.controls = [];
   			$scope.directives = [];
 
-  			console.log('proj items:::', projectItems);
-
 			projectItems.map(function(item){
 				if (item.type == 'Control'){
 					$scope.controls.push(item);
@@ -95,7 +93,15 @@ ideControllers.controller('droid_edit', ['$scope', 'dataService', 'utils', 'AppS
 	};
 
 	$scope.selectIcon = function(){
-		
+
+		var handler = {
+			saved:function(result){
+				$scope.droid.icon = result;
+			},
+			dismissed:function(){}
+		};
+
+		return $scope.openModal('../templates/icon_select.html', 'icon_select', handler, [$scope.droid]);
 	};
 
 	var onSave = function(args){

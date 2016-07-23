@@ -98,6 +98,13 @@
 	-moz-box-shadow: 2px 2px 19px red;
 }
 
+.flowchart .shape.info {
+	box-shadow: 2px 2px 19px blue;
+	-o-box-shadow: 2px 2px 19px blue;
+	-webkit-box-shadow: 2px 2px 19px blue;
+	-moz-box-shadow: 2px 2px 19px blue;
+}
+
 /*
 .flowchart .shape:hover {
   box-shadow: 2px 2px 19px #444;
@@ -161,6 +168,13 @@
 	-o-box-shadow: 2px 2px 19px red;
 	-webkit-box-shadow: 2px 2px 19px red;
 	-moz-box-shadow: 2px 2px 19px red;
+}
+
+.flowchart-container.map .shape.info {
+	box-shadow: 2px 2px 19px blue;
+	-o-box-shadow: 2px 2px 19px blue;
+	-webkit-box-shadow: 2px 2px 19px blue;
+	-moz-box-shadow: 2px 2px 19px blue;
 }
 
 .flowchart-container.map .shape #shape_label {
@@ -232,3 +246,12 @@
 	font-size:28px;
 	border-bottom:1px solid whitesmoke;
 }
+
+.map-shape-edit {
+	display:none;
+}
+
+.flowchart-container.map .map-shape-edit {
+	display:inline-block;
+}
+

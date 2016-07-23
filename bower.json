@@ -29,6 +29,12 @@
     "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.7.0",
     "angular-awesome-slider": "~2.4.4",
     "leaflet": "^0.7.7",
-    "ui-leaflet": "^1.0.1"
+    "ui-leaflet": "^1.0.1",
+    "angular-masonry": "^0.16.0",
+    "angular-sanitize": "^1.5.7"
+  },
+  "resolutions": {
+    "jquery": "~2.2.0",
+    "angular": "1.5.0"
   }
 }
